@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="colorPrimary">#E63716</color>
+    <color name="colorPrimary22">#B3E63716</color>
+    <color name="colorPrimary88">#F2641F</color>
+    <color name="colorPrimary2">#E63716</color>
+    <color name="colorBackground">#FAFAFA</color>
+    <color name="colorBackground2">#E6E6E6</color>
+    <color name="textColor">#232323</color>
+    <color name="textColor2">#B3232323</color>
+    <color name="textWhite">#ffffff</color>
+    <color name="textWhite2">#D9FFFFFF</color>
+    <color name="red">#DE3417</color>
+    <color name="yellow">#FAA817</color>
+    <color name="orang">#F2641F</color>
+    <color name="whatsColor">#27D045</color>
+    <color name="facebookColor">#1778F2</color>
+    <color name="telegramColor">#2EABE0</color>
+
+
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>

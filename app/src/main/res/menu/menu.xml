@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:override="true"
+    >
+
+    <item
+        android:id="@+id/home_menu"
+        android:icon="@drawable/ic_launcher_background"
+        android:iconTint="@color/textColor2"
+        android:title="الرئيسية" />
+
+    <item
+        android:id="@+id/cart_menu"
+        android:icon="@drawable/ic_launcher_background"
+        android:iconTint="@color/textColor2"
+        android:title="طلابي" />
+
+
+    <item
+        android:id="@+id/sections_menu"
+        android:icon="@drawable/ic_launcher_background"
+        android:iconTint="@color/textColor2"
+        android:title="المدرسين" />
+
+
+    <item
+        android:id="@+id/favorite_menu"
+        android:icon="@drawable/ic_launcher_background"
+        android:iconTint="@color/textColor2"
+        android:title="حسابي" />
+
+    <item
+        android:id="@+id/profile_menu"
+        android:icon="@drawable/ic_launcher_background"
+        android:iconTint="@color/textColor2"
+        android:title="حسابي" />
+
+</menu>
