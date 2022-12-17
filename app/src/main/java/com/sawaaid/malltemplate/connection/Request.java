@@ -3,6 +3,7 @@ package com.sawaaid.malltemplate.connection;
 import androidx.annotation.NonNull;
 
 import com.sawaaid.malltemplate.connection.response.RespAds;
+import com.sawaaid.malltemplate.connection.response.RespProduct;
 import com.sawaaid.malltemplate.connection.response.RespSections;
 
 import retrofit2.Call;
@@ -33,6 +34,60 @@ public class Request {
 
             @Override
             public void onFailure(@NonNull Call<RespSections> call, @NonNull Throwable t) {
+                listener.onFinish();
+                listener.onFailed(t.getMessage());
+            }
+        });
+    }
+
+    public void sectionProducts(RequestListener<RespProduct> listener) {
+        Call<RespProduct> callbackCall = api.sectionProduct();
+        callbackCall.enqueue(new Callback<RespProduct>() {
+            @Override
+            public void onResponse(@NonNull Call<RespProduct> call, @NonNull Response<RespProduct> response) {
+                RespProduct resp = response.body();
+                listener.onFinish();
+                if (resp == null) {
+                    listener.onFailed(null);
+                } else {
+                    if (resp.code != 200) {
+                        listener.onFailed(resp.message);
+                    } else {
+                        listener.onSuccess(resp);
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<RespProduct> call, @NonNull Throwable t) {
+                listener.onFinish();
+                listener.onFailed(t.getMessage());
+            }
+        });
+    }
+
+    public void newProducts(RequestListener<RespProduct> listener) {
+        Call<RespProduct> callbackCall = api.newProducts();
+        callbackCall.enqueue(new Callback<RespProduct>() {
+            @Override
+            public void onResponse(@NonNull Call<RespProduct> call, @NonNull Response<RespProduct> response) {
+                RespProduct resp = response.body();
+                listener.onFinish();
+                if (resp == null) {
+                    listener.onFailed(null);
+                } else {
+                    if (resp.code != 200) {
+                        listener.onFailed(resp.message);
+                    } else {
+                        listener.onSuccess(resp);
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<RespProduct> call, @NonNull Throwable t) {
                 listener.onFinish();
                 listener.onFailed(t.getMessage());
             }

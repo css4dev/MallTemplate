@@ -2,6 +2,7 @@ package com.sawaaid.malltemplate.connection;
 
 
 import com.sawaaid.malltemplate.connection.response.RespAds;
+import com.sawaaid.malltemplate.connection.response.RespProduct;
 import com.sawaaid.malltemplate.connection.response.RespSections;
 
 
@@ -18,6 +19,15 @@ public interface API {
 
     @GET("api/sliders")
     Call<RespAds> ads();
+
+    @GET("api/sectionProducts/64/1")
+    Call<RespProduct> sectionProduct();
+
+    @GET("api/newProducts")
+    Call<RespProduct> newProducts();
+
+
+
 
 
 }

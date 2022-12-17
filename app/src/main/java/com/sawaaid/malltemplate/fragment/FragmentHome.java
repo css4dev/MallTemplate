@@ -13,6 +13,7 @@ import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -194,6 +195,7 @@ public class FragmentHome extends Fragment {
             @Override
             public void onFailed(String messages) {
                 super.onFailed(messages);
+                Log.d("TAGbb", "onFailed: " + messages);
             }
         });
     }
