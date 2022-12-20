@@ -9,7 +9,7 @@ import java.io.Serializable;
 @Entity(tableName = "product")
 public class Product implements Serializable {
 
-    @PrimaryKey
+    @PrimaryKey (autoGenerate = true)
     public int id1;
 
     @ColumnInfo(name = "id")
