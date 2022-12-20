@@ -1,5 +1,7 @@
 package com.sawaaid.malltemplate;
 
+import static com.sawaaid.malltemplate.adapter.AdapterSubSections.viewArrayList;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,8 +20,11 @@ import com.sawaaid.malltemplate.data.Constant;
 import com.sawaaid.malltemplate.databinding.ActivitySectionProductsBinding;
 import com.sawaaid.malltemplate.model.Product;
 import com.sawaaid.malltemplate.model.SubSection;
+import com.sawaaid.malltemplate.model.ViewArrayModel;
 
 import java.util.List;
+
+import me.grantland.widget.AutofitTextView;
 
 
 public class ActivitySectionProducts extends AppCompatActivity {
@@ -111,7 +116,16 @@ public class ActivitySectionProducts extends AppCompatActivity {
         binding.secondarySectionsRecyclerView.setItemViewCacheSize(50);
 
         adapterSubSections.setOnItemClickListener((view, obj, position) -> {
+            //    requestAction(1);
 
+            for (ViewArrayModel v : viewArrayList) {
+                v.getLytParent().setBackgroundResource(R.drawable.btn_unpressed);
+                v.getSubSectionName().setTextColor(getResources().getColor(R.color.textColor));
+            }
+
+            view.setBackgroundResource(R.drawable.button_pressed);
+            AutofitTextView textView = view.findViewById(R.id.nameTextView);
+            textView.setTextColor(getResources().getColor(R.color.colorBackground));
         });
     }
 

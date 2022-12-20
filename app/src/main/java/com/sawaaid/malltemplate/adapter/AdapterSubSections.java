@@ -9,6 +9,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.sawaaid.malltemplate.R;
 import com.sawaaid.malltemplate.model.SubSection;
+import com.sawaaid.malltemplate.model.ViewArrayModel;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import me.grantland.widget.AutofitTextView;
@@ -18,7 +21,7 @@ public class AdapterSubSections extends RecyclerView.Adapter<RecyclerView.ViewHo
     private final List<SubSection> items;
     private AdapterSubSections.OnItemClickListener onItemClickListener;
     Context context;
-
+    public static ArrayList<ViewArrayModel> viewArrayList = new ArrayList<>();
 
     public interface OnItemClickListener {
         void onItemClick(View view, SubSection obj, int position);
@@ -45,7 +48,7 @@ public class AdapterSubSections extends RecyclerView.Adapter<RecyclerView.ViewHo
     public AdapterSubSections(List<SubSection> items, Context context) {
         this.items = items;
         this.context = context;
-
+        viewArrayList.clear();
     }
 
     @NonNull
@@ -67,6 +70,12 @@ public class AdapterSubSections extends RecyclerView.Adapter<RecyclerView.ViewHo
             vItem.section_title.setText(p.name);
             vItem.lytParent.setOnClickListener(view -> onItemClickListener.onItemClick(view, p, position));
 
+            if (viewArrayList.size() < items.size()) {
+                ViewArrayModel viewArrayModel = new ViewArrayModel();
+                viewArrayModel.setLytParent(vItem.lytParent);
+                viewArrayModel.setSubSectionName(vItem.section_title);
+                viewArrayList.add(viewArrayModel);
+            }
 
         }
 

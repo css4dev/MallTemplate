@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android Awesome Projects/MallTemplate/app/src/main/res/drawable-v24/btn_unpressed.xml" value="0.1075" />
+        <entry key="..\:/Android Awesome Projects/MallTemplate/app/src/main/res/drawable-v24/button_tab1.xml" value="0.1075" />
         <entry key="..\:/Android Awesome Projects/MallTemplate/app/src/main/res/drawable-v24/home_linear.xml" value="0.139" />
         <entry key="..\:/Android Awesome Projects/MallTemplate/app/src/main/res/drawable-v24/ic_chat_icon.xml" value="0.139" />
         <entry key="..\:/Android Awesome Projects/MallTemplate/app/src/main/res/drawable/active_dot.xml" value="0.139" />
