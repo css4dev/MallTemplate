@@ -9,10 +9,13 @@ import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
 import com.sawaaid.malltemplate.R;
+import com.sawaaid.malltemplate.model.Ads;
+import com.sawaaid.malltemplate.model.Product;
+import com.sawaaid.malltemplate.model.Section;
 import com.sawaaid.malltemplate.model.User;
 
 
-@Database(entities = {User.class}, version = 1, exportSchema = false)
+@Database(entities = {Ads.class, Product.class, Section.class}, version = 1, exportSchema = false)
 @TypeConverters({})
 public abstract class AppDatabase extends RoomDatabase {
 

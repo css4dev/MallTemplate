@@ -34,6 +34,7 @@ import com.sawaaid.malltemplate.connection.RequestListener;
 import com.sawaaid.malltemplate.connection.response.RespAds;
 import com.sawaaid.malltemplate.connection.response.RespProduct;
 import com.sawaaid.malltemplate.connection.response.RespSections;
+import com.sawaaid.malltemplate.data.DataApp;
 import com.sawaaid.malltemplate.model.Ads;
 import com.sawaaid.malltemplate.model.Product;
 import com.sawaaid.malltemplate.model.Section;
@@ -242,11 +243,16 @@ public class FragmentHome extends Fragment {
             public void onSuccess(RespSections resp) {
                 super.onSuccess(resp);
                 displayData(resp.data);
+                DataApp.dao().deleteSections();
+                DataApp.dao().insertSections(resp.data);
             }
 
             @Override
             public void onFailed(String messages) {
                 super.onFailed(messages);
+                List<Section> sections = DataApp.dao().getSections();
+                if (sections.size() != 0)
+                    displayData(sections);
             }
         });
     }
@@ -282,12 +288,20 @@ public class FragmentHome extends Fragment {
                 setTimerRunnable(resp.data);
                 viewPager2Adapter = new ViewPager2Adapter(context, resp.data);
                 viewPager2.setAdapter(viewPager2Adapter);
+                DataApp.dao().deleteAds();
+                DataApp.dao().insertAds(resp.data);
             }
 
             @Override
             public void onFailed(String messages) {
                 super.onFailed(messages);
-                Log.d("TAGbb", "onFailed: " + messages);
+
+                List<Ads> entityAdsList = DataApp.dao().getAds();
+                if (entityAdsList.size() != 0) {
+                    setTimerRunnable(entityAdsList);
+                    viewPager2Adapter = new ViewPager2Adapter(context, entityAdsList);
+                    viewPager2.setAdapter(viewPager2Adapter);
+                }
             }
         });
     }
