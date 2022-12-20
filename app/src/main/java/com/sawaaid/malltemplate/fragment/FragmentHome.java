@@ -1,6 +1,7 @@
 package com.sawaaid.malltemplate.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -20,15 +21,21 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 
+import com.sawaaid.malltemplate.ActivitySectionProducts;
 import com.sawaaid.malltemplate.R;
+import com.sawaaid.malltemplate.adapter.AdapterNewProducts;
 import com.sawaaid.malltemplate.adapter.AdapterSections;
+import com.sawaaid.malltemplate.adapter.AdapterSpecialProducts;
 import com.sawaaid.malltemplate.adapter.ViewPager2Adapter;
 import com.sawaaid.malltemplate.connection.Request;
 import com.sawaaid.malltemplate.connection.RequestListener;
 import com.sawaaid.malltemplate.connection.response.RespAds;
+import com.sawaaid.malltemplate.connection.response.RespProduct;
 import com.sawaaid.malltemplate.connection.response.RespSections;
 import com.sawaaid.malltemplate.model.Ads;
+import com.sawaaid.malltemplate.model.Product;
 import com.sawaaid.malltemplate.model.Section;
 
 import java.util.List;
@@ -38,15 +45,18 @@ public class FragmentHome extends Fragment {
 
     View rootView;
     Context context;
-    RecyclerView sections_recyclerview;
+    RecyclerView sections_recyclerview, newProductsRecyclerView, offerProductsRecyclerView;
     AdapterSections adapterSections;
+    AdapterNewProducts adapterNewProducts;
     Request request;
     ProgressBar progressBar;
     ViewPager2Adapter viewPager2Adapter;
     ViewPager2 viewPager2;
     LinearLayout sliderDots;
     Runnable sliderRunnable;
+    AdapterSpecialProducts adapterSpecialProducts;
     private final Handler sliderHandler = new Handler();
+
 
     public FragmentHome() {
 
@@ -71,11 +81,87 @@ public class FragmentHome extends Fragment {
         sections_recyclerview = rootView.findViewById(R.id.sections_recyclerview);
         viewPager2 = rootView.findViewById(R.id.viewPager);
         sliderDots = rootView.findViewById(R.id.sliderDots);
+        newProductsRecyclerView = rootView.findViewById(R.id.newProductsRecyclerView);
+        offerProductsRecyclerView = rootView.findViewById(R.id.offerProductsRecyclerView);
 
         initViewPager();
         requestSections();
         requestAds();
+        requestNewProducts();
+        requestSpecialProducts();
 
+    }
+
+    private void requestSpecialProducts() {
+        request.specialProducts(new RequestListener<RespProduct>() {
+            @Override
+            public void onFinish() {
+                super.onFinish();
+            }
+
+            @Override
+            public void onSuccess(RespProduct resp) {
+                super.onSuccess(resp);
+                displayDataSpecialProducts(resp.data);
+            }
+
+            @Override
+            public void onFailed(String messages) {
+                super.onFailed(messages);
+            }
+        });
+    }
+
+    private void displayDataSpecialProducts(List<Product> data) {
+        addRecyclerWithAdapterSpecialProducts(data, offerProductsRecyclerView);
+    }
+
+    private void addRecyclerWithAdapterSpecialProducts(List<Product> data, RecyclerView recyclerView) {
+        adapterSpecialProducts = new AdapterSpecialProducts(data, context);
+        recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
+        recyclerView.setAdapter(adapterSpecialProducts);
+        recyclerView.setOnFlingListener(null);
+        recyclerView.setItemViewCacheSize(50);
+
+        adapterSpecialProducts.setOnItemClickListener((view, obj, position) -> {
+
+        });
+    }
+
+    private void requestNewProducts() {
+        request.newProducts(new RequestListener<RespProduct>() {
+            @Override
+            public void onFinish() {
+                super.onFinish();
+            }
+
+            @Override
+            public void onSuccess(RespProduct resp) {
+                super.onSuccess(resp);
+                displayDataNewProducts(resp.data);
+            }
+
+            @Override
+            public void onFailed(String messages) {
+                super.onFailed(messages);
+            }
+        });
+    }
+
+    private void displayDataNewProducts(List<Product> data) {
+        addRecyclerWithAdapterNewProducts(newProductsRecyclerView, data);
+    }
+
+    private void addRecyclerWithAdapterNewProducts(RecyclerView recyclerView, List<Product> data) {
+        adapterNewProducts = new AdapterNewProducts(data, context);
+        recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
+        recyclerView.setAdapter(adapterNewProducts);
+        recyclerView.setOnFlingListener(null);
+        recyclerView.setItemViewCacheSize(50);
+
+        adapterNewProducts.setOnItemClickListener((view, obj, position) -> {
+
+        });
     }
 
 
@@ -175,6 +261,12 @@ public class FragmentHome extends Fragment {
         recyclerView.setAdapter(adapterSections);
         recyclerView.setOnFlingListener(null);
         recyclerView.setItemViewCacheSize(50);
+
+        adapterSections.setOnItemClickListener((view, obj, position) -> {
+            Intent intent = new Intent(context, ActivitySectionProducts.class);
+            intent.putExtra("SECTION_ID", obj.id);
+            startActivity(intent);
+        });
     }
 
     private void requestAds() {

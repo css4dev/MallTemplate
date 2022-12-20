@@ -2,6 +2,7 @@ package com.sawaaid.malltemplate.data;
 
 public class Constant {
 
+    public static final int LISTING_PAGE = 10;
     /**
      * -------------------- EDIT THIS WITH YOURS -------------------------------------------------
      */

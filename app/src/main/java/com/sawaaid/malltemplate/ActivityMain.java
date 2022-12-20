@@ -1,10 +1,12 @@
 package com.sawaaid.malltemplate;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -23,6 +25,7 @@ public class ActivityMain extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
     FragmentHome fragmentHome;
+    SearchView searchEdit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,8 @@ public class ActivityMain extends AppCompatActivity {
         replaceFragment(new FragmentHome(), "HOME");
         fragmentHome = new FragmentHome();
         bottomNavigationView = findViewById(R.id.bottomNavigationMain);
+        searchEdit = findViewById(R.id.searchEdit);
+
         bottomNavigationView.setOnItemSelectedListener(item -> {
 
             if (item.getItemId() == R.id.home_menu) {
@@ -53,6 +58,27 @@ public class ActivityMain extends AppCompatActivity {
 
 
             return true;
+        });
+
+        searchEdit.setIconifiedByDefault(false);
+        searchEdit.setQuery("", false);
+        searchEdit.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Intent intent = new Intent(getApplicationContext(), ActivitySearch.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("WORD", query);
+                bundle.putString("SECTION_ID", "-1");
+                intent.putExtras(bundle);
+                startActivity(intent);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                return true;
+            }
         });
 
     }
@@ -85,4 +111,10 @@ public class ActivityMain extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        searchEdit.setQuery("", false);
+        searchEdit.clearFocus();
+    }
 }
