@@ -33,7 +33,7 @@ public class ActivitySectionProducts extends AppCompatActivity {
     Request request;
     ActivitySectionProductsBinding binding;
     AdapterSubSections adapterSubSections;
-    int sectionId;
+    int sectionId, subSectionId;
     private boolean allLoaded = false;
 
     @Override
@@ -46,12 +46,12 @@ public class ActivitySectionProducts extends AppCompatActivity {
 
         initComponent();
 
-        requestAction(1);
+        requestAction(1, 0);
     }
 
-    private void requestAction(int page_no) {
+    private void requestAction(int page_no, int sub_section) {
         adapterProducts.setLoadingOrFailed(null);
-        requestSectionProducts(sectionId, page_no);
+        requestSectionProducts(sectionId, page_no, sub_section);
     }
 
     private void initComponent() {
@@ -79,7 +79,7 @@ public class ActivitySectionProducts extends AppCompatActivity {
                     adapterProducts.setLoaded();
                 } else {
                     int next_page = page + 1;
-                    requestAction(next_page);
+                    requestAction(next_page, subSectionId);
                 }
             }
         });
@@ -117,6 +117,8 @@ public class ActivitySectionProducts extends AppCompatActivity {
 
         adapterSubSections.setOnItemClickListener((view, obj, position) -> {
             //    requestAction(1);
+            adapterProducts.resetListData();
+            requestAction(1, obj.id);
 
             for (ViewArrayModel v : viewArrayList) {
                 v.getLytParent().setBackgroundResource(R.drawable.btn_unpressed);
@@ -129,8 +131,8 @@ public class ActivitySectionProducts extends AppCompatActivity {
         });
     }
 
-    private void requestSectionProducts(int sectionId, int page_no) {
-        request.sectionProducts(String.valueOf(page_no), String.valueOf(sectionId), new RequestListener<RespProduct>() {
+    private void requestSectionProducts(int sectionId, int page_no, int subSectionId) {
+        request.sectionProducts(String.valueOf(page_no), String.valueOf(sectionId), String.valueOf(subSectionId),new RequestListener<RespProduct>() {
             @Override
             public void onFinish() {
                 super.onFinish();

@@ -43,8 +43,8 @@ public class Request {
         });
     }
 
-    public void sectionProducts(String page_no, String sectionId, RequestListener<RespProduct> listener) {
-        Call<RespProduct> callbackCall = api.sectionProduct(sectionId, page_no);
+    public void sectionProducts(String page_no, String sectionId, String subSectionId, RequestListener<RespProduct> listener) {
+        Call<RespProduct> callbackCall = api.sectionProduct(sectionId, subSectionId, page_no);
         callbackCall.enqueue(new Callback<RespProduct>() {
             @Override
             public void onResponse(@NonNull Call<RespProduct> call, @NonNull Response<RespProduct> response) {
@@ -124,6 +124,7 @@ public class Request {
             }
         });
     }
+
 
     public void newProducts(RequestListener<RespProduct> listener) {
         Call<RespProduct> callbackCall = api.newProducts();

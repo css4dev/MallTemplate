@@ -22,8 +22,8 @@ public interface API {
     @GET("api/sliders")
     Call<RespAds> ads();
 
-    @GET("api/sectionProducts/{sectionId}/{page}")
-    Call<RespProduct> sectionProduct(@Path("sectionId") String sectionId, @Path("page") String page_no);
+    @GET("api/sectionProducts/{sectionId}/{subsectionId}/{page}")
+    Call<RespProduct> sectionProduct(@Path("sectionId") String sectionId,@Path("subsectionId") String subSectionId ,@Path("page") String page_no);
 
     @GET("api/newProducts")
     Call<RespProduct> newProducts();
@@ -36,5 +36,6 @@ public interface API {
 
     @GET("api/subSections/{sectionId}")
     Call<RespSubSection> subSections(@Path("sectionId") String sectionId);
+
 
 }

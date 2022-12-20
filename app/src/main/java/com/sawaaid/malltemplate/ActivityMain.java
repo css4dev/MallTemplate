@@ -12,6 +12,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.sawaaid.malltemplate.connection.Request;
 import com.sawaaid.malltemplate.connection.RequestListener;
 import com.sawaaid.malltemplate.connection.response.RespProduct;
@@ -31,6 +32,8 @@ public class ActivityMain extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        FirebaseMessaging.getInstance().subscribeToTopic("NEWS");
 
         initComponents();
         requestSectionProducts();

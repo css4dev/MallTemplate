@@ -44,7 +44,7 @@ public class FcmMessagingService extends FirebaseMessagingService {
             body = jsonObject.getString("body");
             activity = jsonObject.getString("activity");
 
-
+            showNotification(body, title, activity);
         } catch (JSONException ignored) {
 
         }
@@ -52,7 +52,7 @@ public class FcmMessagingService extends FirebaseMessagingService {
 
     }
 
-    private void showNotification(String body, String title, String activity, String studentId) {
+    private void showNotification(String body, String title, String activity) {
 
 
         String NOTIFICATION_CHANNEL_ID = "SHAM";
@@ -76,3 +76,4 @@ public class FcmMessagingService extends FirebaseMessagingService {
 
     }
 }
+//AAAAo9r31eQ:APA91bGRQqWRnOdRY5JCTobkYB_GmZ2NB46jzb1I1I4kAhlpwTDoC7jgterz5hLTrL9-WYDpWiuSY_N5d3wXqlLDcJkzOOGL0wTI2UMpCE8_FV48WYpiES8RseHkzCVGGILgPIwRJfKT
