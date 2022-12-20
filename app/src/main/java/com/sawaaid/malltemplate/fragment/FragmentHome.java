@@ -104,11 +104,17 @@ public class FragmentHome extends Fragment {
             public void onSuccess(RespProduct resp) {
                 super.onSuccess(resp);
                 displayDataSpecialProducts(resp.data);
+                DataApp.dao().deleteProductsIsSpecial();
+                DataApp.dao().insertProduct(resp.data);
             }
 
             @Override
             public void onFailed(String messages) {
                 super.onFailed(messages);
+                List<Product> productList = DataApp.dao().getProductsIsSpecial();
+                if (productList.size() > 0) {
+                    displayDataSpecialProducts(productList);
+                }
             }
         });
     }
@@ -140,11 +146,17 @@ public class FragmentHome extends Fragment {
             public void onSuccess(RespProduct resp) {
                 super.onSuccess(resp);
                 displayDataNewProducts(resp.data);
+                DataApp.dao().deleteProductsIsNew();
+                DataApp.dao().insertProduct(resp.data);
             }
 
             @Override
             public void onFailed(String messages) {
                 super.onFailed(messages);
+                List<Product> productList = DataApp.dao().getProductsIsNew();
+                if (productList.size() > 0) {
+                    displayDataNewProducts(productList);
+                }
             }
         });
     }

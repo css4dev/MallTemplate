@@ -17,6 +17,7 @@ import com.sawaaid.malltemplate.connection.RequestListener;
 import com.sawaaid.malltemplate.connection.response.RespProduct;
 import com.sawaaid.malltemplate.connection.response.RespSubSection;
 import com.sawaaid.malltemplate.data.Constant;
+import com.sawaaid.malltemplate.data.DataApp;
 import com.sawaaid.malltemplate.databinding.ActivitySectionProductsBinding;
 import com.sawaaid.malltemplate.model.Product;
 import com.sawaaid.malltemplate.model.SubSection;
@@ -99,11 +100,17 @@ public class ActivitySectionProducts extends AppCompatActivity {
             public void onSuccess(RespSubSection resp) {
                 super.onSuccess(resp);
                 displaySubSections(resp.data);
+                DataApp.dao().deleteSubSection(String.valueOf(sectionId));
+                DataApp.dao().insertSubSections(resp.data);
             }
 
             @Override
             public void onFailed(String messages) {
                 super.onFailed(messages);
+                List<SubSection> subSections = DataApp.dao().getSubSections(String.valueOf(sectionId));
+                if (subSections.size() > 0) {
+                    displaySubSections(subSections);
+                }
             }
         });
     }
@@ -116,7 +123,6 @@ public class ActivitySectionProducts extends AppCompatActivity {
         binding.secondarySectionsRecyclerView.setItemViewCacheSize(50);
 
         adapterSubSections.setOnItemClickListener((view, obj, position) -> {
-            //    requestAction(1);
             adapterProducts.resetListData();
             requestAction(1, obj.id);
 
@@ -132,7 +138,7 @@ public class ActivitySectionProducts extends AppCompatActivity {
     }
 
     private void requestSectionProducts(int sectionId, int page_no, int subSectionId) {
-        request.sectionProducts(String.valueOf(page_no), String.valueOf(sectionId), String.valueOf(subSectionId),new RequestListener<RespProduct>() {
+        request.sectionProducts(String.valueOf(page_no), String.valueOf(sectionId), String.valueOf(subSectionId), new RequestListener<RespProduct>() {
             @Override
             public void onFinish() {
                 super.onFinish();
@@ -143,11 +149,17 @@ public class ActivitySectionProducts extends AppCompatActivity {
                 super.onSuccess(resp);
                 allLoaded = resp.data.size() < Constant.LISTING_PAGE;
                 displayApiResult(resp.data);
+                DataApp.dao().deleteSectionProducts(String.valueOf(sectionId), String.valueOf(subSectionId));
+                DataApp.dao().insertProduct(resp.data);
             }
 
             @Override
             public void onFailed(String messages) {
                 super.onFailed(messages);
+                List<Product> productList = DataApp.dao().getSectionProducts(String.valueOf(sectionId), String.valueOf(subSectionId));
+                if (productList.size() > 0) {
+                    displayApiResult(productList);
+                }
             }
         });
     }
