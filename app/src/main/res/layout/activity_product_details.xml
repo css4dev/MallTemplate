@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="rtl">
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/_100sdp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="60dp"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3">
+
+
+                    <RelativeLayout
+                        android:layout_width="@dimen/_28sdp"
+                        android:layout_height="@dimen/_28sdp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_margin="@dimen/_16sdp"
+                        android:elevation="0dp"
+                        android:translationZ="3dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/border_circle"
+                            android:elevation="0dp"
+                            app:backgroundTint="@null" />
+
+                        <Button
+                            android:id="@+id/backButton"
+                            android:layout_width="@dimen/_18sdp"
+                            android:layout_height="@dimen/_18sdp"
+                            android:layout_centerInParent="true"
+                            android:background="@drawable/ic_right_arrow"
+                            app:backgroundTint="@color/textColor" />
+
+                    </RelativeLayout>
+
+
+                    <ImageView
+                        android:id="@+id/image"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_310sdp"
+                        android:scaleType="centerCrop" />
+
+                    <LinearLayout
+                        android:id="@+id/SliderDotswq"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_16sdp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginTop="-20dp"
+                        android:gravity="center"
+                        android:layoutDirection="ltr"
+                        android:orientation="horizontal">
+
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:elevation="@dimen/_5sdp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <me.grantland.widget.AutofitTextView
+                            android:id="@+id/productNameTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_8sdp"
+                            android:layout_marginTop="@dimen/_16sdp"
+                            android:layout_marginRight="@dimen/_8sdp"
+                            android:fontFamily="@font/helvetica"
+                            android:gravity="center"
+                            android:maxLines="2"
+                            android:text="مسحوق غسييل مدار"
+                            android:textSize="@dimen/_18ssp"
+                            app:minTextSize="@dimen/_12ssp" />
+
+                        <me.grantland.widget.AutofitTextView
+                            android:id="@+id/productDetailsTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_16sdp"
+                            android:layout_marginTop="@dimen/_4sdp"
+                            android:layout_marginRight="@dimen/_16sdp"
+                            android:fontFamily="@font/helvetica"
+                            android:gravity="center"
+                            android:lineSpacingMultiplier="1.6"
+                            android:maxLines="2"
+                            android:textSize="@dimen/_14ssp"
+                            app:minTextSize="@dimen/_11ssp" />
+
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_16sdp">
+
+
+                            <com.sawaaid.malltemplate.widget.ElegantNumberButton
+                                android:id="@+id/elegantNumberButton"
+                                android:layout_width="@dimen/_150sdp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:visibility="gone"
+                                app:backGroundColor="@color/colorPrimary2"
+                                app:textColor="@color/textWhite"
+                                app:textSize="@dimen/_6sdp">
+
+                            </com.sawaaid.malltemplate.widget.ElegantNumberButton>
+
+
+                            <LinearLayout
+                                android:id="@+id/noPieseLinear"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+
+                                <LinearLayout
+                                    android:id="@+id/linearChangeCount"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:orientation="horizontal"
+                                    android:outlineSpotShadowColor="@color/textColor">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:fontFamily="@font/helvetica"
+                                        android:gravity="left|center_vertical"
+                                        android:paddingLeft="10dp"
+                                        android:text="الكمية:"
+                                        android:textSize="@dimen/_15ssp" />
+
+                                    <TextView
+                                        android:id="@+id/quantityText"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:fontFamily="@font/helvetica"
+                                        android:gravity="center"
+                                        android:maxLength="4"
+                                        android:textSize="@dimen/_15ssp"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:fontFamily="@font/helvetica"
+                                        android:gravity="right|center_vertical"
+                                        android:paddingRight="10dp"
+                                        android:text="kg"
+                                        android:textSize="@dimen/_15ssp" />
+                                </LinearLayout>
+
+                                <Button
+                                    android:id="@+id/quantityButton"
+                                    android:layout_width="@dimen/_100sdp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/_8sdp"
+                                    android:background="@drawable/quantity_border"
+                                    android:fontFamily="@font/helvetica"
+                                    android:gravity="center"
+                                    android:paddingLeft="@dimen/_4sdp"
+                                    android:paddingRight="@dimen/_4sdp"
+                                    android:text="تغيير السعر"
+                                    android:textColor="@color/orang"
+                                    android:textSize="@dimen/_15ssp"
+                                    app:backgroundTint="@null" />
+                            </LinearLayout>
+                        </RelativeLayout>
+                    </LinearLayout>
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_100sdp"
+        android:layout_alignParentBottom="true"
+        android:elevation="10dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="5dp">
+
+        <LinearLayout
+            android:id="@+id/noPieseLinear1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_16sdp"
+            android:layout_marginRight="@dimen/_16sdp"
+            android:layout_marginBottom="@dimen/_8sdp"
+            android:orientation="horizontal">
+
+            <me.grantland.widget.AutofitTextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/helvetica"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="المجموع الكلي:"
+                android:textSize="@dimen/_13ssp"
+                app:minTextSize="@dimen/_12ssp" />
+
+            <me.grantland.widget.AutofitTextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/_4sdp"
+                android:layout_marginRight="@dimen/_4sdp"
+                android:fontFamily="@font/helvetica"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="----------------------"
+                android:textSize="@dimen/_15ssp"
+                app:minTextSize="@dimen/_12ssp" />
+
+            <me.grantland.widget.AutofitTextView
+                android:id="@+id/productTotalPriceTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/helvetica"
+                android:gravity="center"
+                android:maxLines="1"
+                android:textSize="@dimen/_16ssp"
+                android:textStyle="bold"
+                app:minTextSize="@dimen/_11ssp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_45sdp"
+            android:layout_alignParentBottom="true"
+            android:elevation="5dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingTop="5dp"
+            android:paddingBottom="3dp"
+            android:weightSum="3">
+
+            <Button
+                android:id="@+id/addToBasket"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="2.5"
+                app:cornerRadius="@dimen/_10sdp"
+                style="@android:style/Animation"
+                android:fontFamily="@font/helvetica"
+                app:rippleColor="@color/textWhite2"
+
+                android:gravity="center"
+                android:text="إضافة إلى السلة"
+                android:textColor="@color/textWhite"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/button_minus"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/add_to"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/ic_favorite_bottom"
+                    app:backgroundTint="@color/red" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:translationZ="20dp"
+        android:visibility="visible">
+
+    </ProgressBar>
+</RelativeLayout>

@@ -10,6 +10,7 @@ import com.sawaaid.malltemplate.model.Ads;
 import com.sawaaid.malltemplate.model.Product;
 import com.sawaaid.malltemplate.model.Section;
 import com.sawaaid.malltemplate.model.SubSection;
+import com.sawaaid.malltemplate.room.entity.EntityBasket;
 
 import java.util.List;
 
@@ -28,8 +29,14 @@ public interface DAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertSubSections(List<SubSection> sections);
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertEntityBasket(EntityBasket productsIds);
+
     @Query("SELECT * FROM ads")
     List<Ads> getAds();
+
+    @Query("SELECT product_id FROM entity_basket")
+    List<EntityBasket> getEntityBasket();
 
     @Query("SELECT * FROM sections")
     List<Section> getSections();
@@ -54,6 +61,9 @@ public interface DAO {
 
     @Query("DELETE FROM product WHERE IsNew = 1")
     void deleteProductsIsNew();
+
+    @Query("DELETE FROM entity_basket WHERE product_id = :productId")
+    void deleteProductFromBasket(String productId);
 
     @Query("DELETE FROM product WHERE sectionId = :sectionId AND subSectionId = :subSectionId")
     void deleteSectionProducts(String sectionId, String subSectionId);

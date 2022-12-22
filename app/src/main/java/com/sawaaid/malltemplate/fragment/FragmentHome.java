@@ -23,6 +23,8 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 
+import com.google.android.datatransport.runtime.firebase.transport.LogEventDropped;
+import com.sawaaid.malltemplate.ActivityProductDetails;
 import com.sawaaid.malltemplate.ActivitySectionProducts;
 import com.sawaaid.malltemplate.R;
 import com.sawaaid.malltemplate.adapter.AdapterNewProducts;
@@ -130,9 +132,7 @@ public class FragmentHome extends Fragment {
         recyclerView.setOnFlingListener(null);
         recyclerView.setItemViewCacheSize(50);
 
-        adapterSpecialProducts.setOnItemClickListener((view, obj, position) -> {
-
-        });
+        adapterSpecialProducts.setOnItemClickListener((view, obj, position) -> ActivityProductDetails.navigate(getActivity(), obj));
     }
 
     private void requestNewProducts() {
@@ -172,9 +172,7 @@ public class FragmentHome extends Fragment {
         recyclerView.setOnFlingListener(null);
         recyclerView.setItemViewCacheSize(50);
 
-        adapterNewProducts.setOnItemClickListener((view, obj, position) -> {
-
-        });
+        adapterNewProducts.setOnItemClickListener((view, obj, position) -> ActivityProductDetails.navigate(getActivity(), obj));
     }
 
 

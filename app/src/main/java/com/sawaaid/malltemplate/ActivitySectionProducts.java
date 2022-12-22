@@ -166,5 +166,6 @@ public class ActivitySectionProducts extends AppCompatActivity {
 
     private void displayApiResult(List<Product> data) {
         adapterProducts.insertData(data);
+
     }
 }

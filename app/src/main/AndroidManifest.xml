@@ -18,9 +18,13 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
+        tools:replace="android:theme"
         android:supportsRtl="true"
         android:theme="@style/Theme.MallTemplate"
         tools:targetApi="31">
+        <activity
+            android:name=".ActivityProductDetails"
+            android:exported="false" />
         <activity
             android:name=".ActivitySearch"
             android:exported="false" />
