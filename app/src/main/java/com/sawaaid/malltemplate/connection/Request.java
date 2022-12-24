@@ -7,6 +7,9 @@ import com.sawaaid.malltemplate.connection.response.RespAds;
 import com.sawaaid.malltemplate.connection.response.RespProduct;
 import com.sawaaid.malltemplate.connection.response.RespSections;
 import com.sawaaid.malltemplate.connection.response.RespSubSection;
+import com.sawaaid.malltemplate.connection.response.RespUser;
+
+import java.util.HashMap;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -226,6 +229,36 @@ public class Request {
 
             @Override
             public void onFailure(@NonNull Call<RespAds> call, @NonNull Throwable t) {
+                listener.onFinish();
+                listener.onFailed(t.getMessage());
+            }
+        });
+    }
+
+    public void login(String userName, String password, RequestListener<RespUser> listener) {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("userName", userName);
+        map.put("password", password);
+        Call<RespUser> callbackCall = api.login(map);
+        callbackCall.enqueue(new Callback<RespUser>() {
+            @Override
+            public void onResponse(@NonNull Call<RespUser> call, @NonNull Response<RespUser> response) {
+                RespUser resp = response.body();
+                listener.onFinish();
+                if (resp == null) {
+                    listener.onFailed(null);
+                } else {
+                    if (resp.code != 200) {
+                        listener.onFailed(resp.message);
+                    } else {
+                        listener.onSuccess(resp);
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<RespUser> call, @NonNull Throwable t) {
                 listener.onFinish();
                 listener.onFailed(t.getMessage());
             }

@@ -36,7 +36,7 @@ public class ActivityMain extends AppCompatActivity {
         FirebaseMessaging.getInstance().subscribeToTopic("NEWS");
 
         initComponents();
-        requestSectionProducts();
+
     }
 
     private void initComponents() {
@@ -91,27 +91,6 @@ public class ActivityMain extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.container, fragment, tag);
         fragmentTransaction.commit();
-    }
-
-    public void requestSectionProducts() {
-        new Request().newProducts(new RequestListener<RespProduct>() {
-            @Override
-            public void onFinish() {
-                super.onFinish();
-            }
-
-            @Override
-            public void onSuccess(RespProduct resp) {
-                super.onSuccess(resp);
-                Toast.makeText(ActivityMain.this, "SUCCESS" + resp.data.size(), Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onFailed(String messages) {
-                super.onFailed(messages);
-                Log.d("TAGv", "onFailed: " + messages);
-            }
-        });
     }
 
     @Override

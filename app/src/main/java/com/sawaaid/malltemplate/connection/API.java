@@ -5,11 +5,17 @@ import com.sawaaid.malltemplate.connection.response.RespAds;
 import com.sawaaid.malltemplate.connection.response.RespProduct;
 import com.sawaaid.malltemplate.connection.response.RespSections;
 import com.sawaaid.malltemplate.connection.response.RespSubSection;
+import com.sawaaid.malltemplate.connection.response.RespUser;
 
+
+import java.util.HashMap;
 
 import retrofit2.Call;
 
+import retrofit2.http.FieldMap;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 
@@ -23,7 +29,7 @@ public interface API {
     Call<RespAds> ads();
 
     @GET("api/sectionProducts/{sectionId}/{subsectionId}/{page}")
-    Call<RespProduct> sectionProduct(@Path("sectionId") String sectionId,@Path("subsectionId") String subSectionId ,@Path("page") String page_no);
+    Call<RespProduct> sectionProduct(@Path("sectionId") String sectionId, @Path("subsectionId") String subSectionId, @Path("page") String page_no);
 
     @GET("api/newProducts")
     Call<RespProduct> newProducts();
@@ -39,6 +45,10 @@ public interface API {
 
     @GET("api/subSections/{sectionId}")
     Call<RespSubSection> subSections(@Path("sectionId") String sectionId);
+
+    @FormUrlEncoded
+    @POST("api/signIn")
+    Call<RespUser> login(@FieldMap HashMap<String, String> map);
 
 
 }
