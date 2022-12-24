@@ -17,6 +17,9 @@ public class EntityBasket {
     @ColumnInfo(name = "quantity")
     public Double quantity;
 
+    @ColumnInfo(name = "price")
+    public Double price;
+
     public Integer getProductId() {
         return productId;
     }
@@ -31,5 +34,13 @@ public class EntityBasket {
 
     public void setQuantity(Double quantity) {
         this.quantity = quantity;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 }

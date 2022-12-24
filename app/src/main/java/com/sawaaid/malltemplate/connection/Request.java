@@ -1,6 +1,5 @@
 package com.sawaaid.malltemplate.connection;
 
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -70,6 +69,32 @@ public class Request {
         });
     }
 
+    public void cartProducts(String id, RequestListener<RespProduct> listener) {
+        Call<RespProduct> callbackCall = api.cartProducts(id);
+        callbackCall.enqueue(new Callback<RespProduct>() {
+            @Override
+            public void onResponse(@NonNull Call<RespProduct> call, @NonNull Response<RespProduct> response) {
+                RespProduct resp = response.body();
+                listener.onFinish();
+                if (resp == null) {
+                    listener.onFailed(null);
+                } else {
+                    if (resp.code != 200) {
+                        listener.onFailed(resp.message);
+                    } else {
+                        listener.onSuccess(resp);
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<RespProduct> call, @NonNull Throwable t) {
+                listener.onFinish();
+                listener.onFailed(t.getMessage());
+            }
+        });
+    }
 
     public void search(String page_no, String word, RequestListener<RespProduct> listener) {
         Call<RespProduct> callbackCall = api.search(word, page_no);

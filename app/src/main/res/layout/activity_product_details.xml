@@ -128,7 +128,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:gravity="center"
-                                android:visibility="gone"
+                                android:visibility="visible"
+                                app:initialNumber="1"
                                 app:backGroundColor="@color/colorPrimary2"
                                 app:textColor="@color/textWhite"
                                 app:textSize="@dimen/_6sdp">

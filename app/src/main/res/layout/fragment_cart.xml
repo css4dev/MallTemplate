@@ -1,14 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.FragmentCart">
+    android:layoutDirection="rtl">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:translationZ="20dp"
+        android:visibility="visible">
+
+    </ProgressBar>
+
+    <LinearLayout
+        android:id="@+id/linearToo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_7sdp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <me.grantland.widget.AutofitTextView
+            android:id="@+id/fareTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:fontFamily="@font/helvetica"
+            android:gravity="start"
+            android:text=""
+            android:textSize="@dimen/_13ssp"
+            app:minTextSize="@dimen/_10ssp" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/linerLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_below="@id/linearToo"
+        android:layout_marginBottom="@dimen/_50sdp"
+        android:orientation="vertical">
 
-</FrameLayout>
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_above="@+id/buttonBuy"
+                android:layout_marginLeft="@dimen/_8sdp"
+                android:layout_marginRight="@dimen/_8sdp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+
+                <me.grantland.widget.AutofitTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/helvetica"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="المجموع النهائي:"
+                    android:textSize="@dimen/_13ssp"
+                    app:minTextSize="@dimen/_12ssp" />
+
+                <me.grantland.widget.AutofitTextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/_4sdp"
+                    android:layout_marginRight="@dimen/_4sdp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/helvetica"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="----------------------------"
+                    android:textSize="@dimen/_15ssp"
+                    app:minTextSize="@dimen/_12ssp" />
+
+                <me.grantland.widget.AutofitTextView
+                    android:id="@+id/totalPriceTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/_4sdp"
+                    android:layout_marginRight="@dimen/_4sdp"
+                    android:fontFamily="@font/helvetica"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="0"
+                    android:textSize="@dimen/_13ssp"
+                    android:textStyle="bold"
+                    app:minTextSize="@dimen/_12ssp" />
+
+
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/buttonBuy"
+                style="@android:style/Animation"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_43sdp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="@dimen/_8sdp"
+                android:layout_marginRight="@dimen/_8sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:fontFamily="@font/helvetica"
+                android:text="إكمال عملية الشراء"
+                android:textColor="@color/textWhite"
+                android:textStyle="bold"
+                app:cornerRadius="@dimen/_10sdp">
+
+            </Button>
+
+            <me.grantland.widget.AutofitTextView
+                android:id="@+id/noProductsInBasketTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/helvetica"
+                android:maxLines="1"
+                android:paddingBottom="@dimen/_4sdp"
+                android:text="لا يوجد منتجات في السلة بعد"
+                android:textSize="@dimen/_20ssp"
+                app:minTextSize="@dimen/_15ssp" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/_72sdp">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

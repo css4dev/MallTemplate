@@ -2,12 +2,11 @@ package com.sawaaid.malltemplate;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 
@@ -17,9 +16,7 @@ import com.sawaaid.malltemplate.databinding.ActivityProductDetailsBinding;
 import com.sawaaid.malltemplate.model.Product;
 import com.sawaaid.malltemplate.room.entity.EntityBasket;
 import com.sawaaid.malltemplate.utils.Tools;
-import com.sawaaid.malltemplate.widget.ElegantNumberButton;
 
-import java.text.NumberFormat;
 import java.util.Locale;
 
 
@@ -32,10 +29,10 @@ public class ActivityProductDetails extends AppCompatActivity {
     }
 
     Product product;
-    Button quantityButton;
     Locale locale = new Locale("TR", "TR");
     Request request;
     ActivityProductDetailsBinding binding;
+    double price;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,11 +53,19 @@ public class ActivityProductDetails extends AppCompatActivity {
         Tools.displayImage(this, binding.image, product.photo);
         binding.backButton.setOnClickListener(view -> onBackPressed());
 
+        if (product.priceAfterSale == 0) {
+            price = product.dollarPrice;
+        } else {
+            price = product.priceAfterSale;
+        }
+
         binding.elegantNumberButton.setOnValueChangeListener((view, oldValue, newValue) -> {
             Locale locale = new Locale("TR", "TR");
             if (product.priceAfterSale == 0) {
+                price = product.dollarPrice;
                 binding.productTotalPriceTextView.setText("₺ " + String.format(locale, "%.2f", newValue * product.dollarPrice));
             } else {
+                price = product.priceAfterSale;
                 binding.productTotalPriceTextView.setText("₺ " + String.format(locale, "%.2f", newValue * product.priceAfterSale));
             }
         });
@@ -73,22 +78,27 @@ public class ActivityProductDetails extends AppCompatActivity {
             try {
                 if (product.purchaseOption.equals("piece") || product.purchaseOption.equals("")) {
                     numCur[0] = binding.elegantNumberButton.getNumber();
+
                 } else {
                     numCur[0] = binding.quantityText.getText().toString().replace(",", ".");
                 }
             } catch (Throwable e) {
                 numCur[0] = binding.elegantNumberButton.getNumber();
             }
-            try {
+
+            if (DataApp.dao().checkProduct(product.id) > 0) {
+                DataApp.dao().updateProductQuantity(product.id, Double.parseDouble(numCur[0]));
+                Toast.makeText(ActivityProductDetails.this, "المنتج مضاف سابقاًً" + "\r\n" + "وتم تعديل كمية المنتج" + "\r\n" + "حسب الكمية الجديدة", Toast.LENGTH_LONG).show();
+            } else {
+                Log.d("TAGvcq", "initComponent: " + Double.parseDouble(numCur[0]));
                 EntityBasket entityBasket = new EntityBasket();
                 entityBasket.setProductId(product.id);
                 entityBasket.setQuantity(Double.parseDouble(numCur[0]));
+                entityBasket.setPrice(price);
                 DataApp.dao().insertEntityBasket(entityBasket);
                 Toast.makeText(ActivityProductDetails.this, "تم إضافة المنتج إلى السلة", Toast.LENGTH_LONG).show();
-
-            } catch (Throwable e) {
-                Toast.makeText(ActivityProductDetails.this, "الرجاء ادخال قيمة", Toast.LENGTH_SHORT).show();
             }
+
         });
     }
 
@@ -96,7 +106,6 @@ public class ActivityProductDetails extends AppCompatActivity {
         binding.progressBar.setVisibility(View.INVISIBLE);
         binding.productDetailsTextView.setText(product.productDetails);
         binding.productNameTextView.setText(product.name);
-
         binding.elegantNumberButton.setVisibility(View.INVISIBLE);
         binding.elegantNumberButton.setRange(1, 20);
 
@@ -128,8 +137,8 @@ public class ActivityProductDetails extends AppCompatActivity {
             } else {
                 binding.noPieseLinear.setVisibility(View.VISIBLE);
                 binding.noPieseLinear1.setVisibility(View.VISIBLE);
-                quantityButton.setText("₺ " + String.format(locale, "%.2f", Double.valueOf(product.priceAfterSale)));
-                quantityButton.setVisibility(View.VISIBLE);
+                binding.quantityButton.setText("₺ " + String.format(locale, "%.2f", Double.valueOf(product.priceAfterSale)));
+                binding.quantityButton.setVisibility(View.VISIBLE);
                 binding.elegantNumberButton.setVisibility(View.GONE);
                 binding.quantityText.setText("1");
             }

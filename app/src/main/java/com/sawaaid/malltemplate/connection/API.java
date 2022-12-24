@@ -31,6 +31,9 @@ public interface API {
     @GET("api/specialProducts")
     Call<RespProduct> specialProducts();
 
+    @GET("api/basketProducts/{id}")
+    Call<RespProduct> cartProducts(@Path("id") String id);
+
     @GET("api/searchProducts/{word}/{page}")
     Call<RespProduct> search(@Path("word") String word, @Path("page") String page);
 

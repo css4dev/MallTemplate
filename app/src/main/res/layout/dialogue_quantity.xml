@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layoutDirection="rtl"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@color/textWhite"
+        android:padding="@dimen/_12sdp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/changeQuantityTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/helvetica"
+            android:gravity="center"
+            android:text="تغيير الكمية "
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/_13ssp" />
+
+        <EditText
+            android:id="@+id/QuantityTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/_8sdp"
+            android:fontFamily="@font/helvetica"
+            android:hint="الكمية "
+            android:inputType="number"
+            android:textColor="@color/textColor"
+            android:textColorHint="@color/textColor"
+            android:textSize="@dimen/_11ssp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+
+            <Button
+                android:id="@+id/cancel_action"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/helvetica"
+                android:gravity="center"
+                android:text="إلغاء الأمر"
+                android:lines="1"
+                app:backgroundTint="@null"
+                android:background="@drawable/button_minus"
+                android:textColor="@color/textColor2"
+                android:textSize="@dimen/_10ssp" />
+            <Button
+                android:id="@+id/OkBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/button"
+                android:fontFamily="@font/helvetica"
+                android:gravity="center"
+                android:text="موافق"
+                android:textColor="@color/textWhite"
+                android:textSize="@dimen/_10ssp" />
+
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

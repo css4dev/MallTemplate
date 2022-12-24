@@ -35,8 +35,17 @@ public interface DAO {
     @Query("SELECT * FROM ads")
     List<Ads> getAds();
 
-    @Query("SELECT product_id FROM entity_basket")
+    @Query("SELECT * FROM entity_basket")
     List<EntityBasket> getEntityBasket();
+
+    @Query("SELECT count(product_id) FROM entity_basket WHERE product_id = :productId")
+    Integer checkProduct(Integer productId);
+
+    @Query("UPDATE entity_basket SET quantity = :quantity WHERE product_id = :productId")
+    Integer updateProductQuantity(Integer productId, Double quantity);
+
+    @Query("SELECT COUNT(*) FROM entity_basket")
+    int getProductBasketCount();
 
     @Query("SELECT * FROM sections")
     List<Section> getSections();
