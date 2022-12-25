@@ -3,7 +3,9 @@ package com.sawaaid.malltemplate.connection;
 
 import androidx.annotation.NonNull;
 
+import com.sawaaid.malltemplate.connection.response.RespAddress;
 import com.sawaaid.malltemplate.connection.response.RespAds;
+import com.sawaaid.malltemplate.connection.response.RespInsert;
 import com.sawaaid.malltemplate.connection.response.RespProduct;
 import com.sawaaid.malltemplate.connection.response.RespSections;
 import com.sawaaid.malltemplate.connection.response.RespSubSection;
@@ -259,6 +261,64 @@ public class Request {
 
             @Override
             public void onFailure(@NonNull Call<RespUser> call, @NonNull Throwable t) {
+                listener.onFinish();
+                listener.onFailed(t.getMessage());
+            }
+        });
+    }
+
+    public void addresses(int userId, RequestListener<RespAddress> listener) {
+        Call<RespAddress> callbackCall = api.addresses(String.valueOf(userId));
+        callbackCall.enqueue(new Callback<RespAddress>() {
+            @Override
+            public void onResponse(@NonNull Call<RespAddress> call, @NonNull Response<RespAddress> response) {
+                RespAddress resp = response.body();
+                listener.onFinish();
+                if (resp == null) {
+                    listener.onFailed(null);
+                } else {
+                    if (resp.code != 200) {
+                        listener.onFailed(resp.message);
+                    } else {
+                        listener.onSuccess(resp);
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<RespAddress> call, @NonNull Throwable t) {
+                listener.onFinish();
+                listener.onFailed(t.getMessage());
+            }
+        });
+    }
+
+    public void insertAddress(String locationString, String locationName, String userId, RequestListener<RespInsert> listener) {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("locationString", locationString);
+        map.put("locationName", locationName);
+        map.put("userId", userId);
+        Call<RespInsert> callbackCall = api.insertAddress(map);
+        callbackCall.enqueue(new Callback<RespInsert>() {
+            @Override
+            public void onResponse(@NonNull Call<RespInsert> call, @NonNull Response<RespInsert> response) {
+                RespInsert resp = response.body();
+                listener.onFinish();
+                if (resp == null) {
+                    listener.onFailed(null);
+                } else {
+                    if (resp.code != 200) {
+                        listener.onFailed(resp.message);
+                    } else {
+                        listener.onSuccess(resp);
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<RespInsert> call, @NonNull Throwable t) {
                 listener.onFinish();
                 listener.onFailed(t.getMessage());
             }

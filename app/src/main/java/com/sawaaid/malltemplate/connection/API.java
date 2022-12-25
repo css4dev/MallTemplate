@@ -1,7 +1,9 @@
 package com.sawaaid.malltemplate.connection;
 
 
+import com.sawaaid.malltemplate.connection.response.RespAddress;
 import com.sawaaid.malltemplate.connection.response.RespAds;
+import com.sawaaid.malltemplate.connection.response.RespInsert;
 import com.sawaaid.malltemplate.connection.response.RespProduct;
 import com.sawaaid.malltemplate.connection.response.RespSections;
 import com.sawaaid.malltemplate.connection.response.RespSubSection;
@@ -46,9 +48,16 @@ public interface API {
     @GET("api/subSections/{sectionId}")
     Call<RespSubSection> subSections(@Path("sectionId") String sectionId);
 
+    @GET("api/location/{userId}")
+    Call<RespAddress> addresses(@Path("userId") String userId);
+
     @FormUrlEncoded
     @POST("api/signIn")
     Call<RespUser> login(@FieldMap HashMap<String, String> map);
+
+    @FormUrlEncoded
+    @POST("api/addLocation")
+    Call<RespInsert> insertAddress(@FieldMap HashMap<String, String> map);
 
 
 }
