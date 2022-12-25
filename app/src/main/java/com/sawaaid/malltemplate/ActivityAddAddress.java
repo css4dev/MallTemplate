@@ -9,19 +9,20 @@ import android.widget.Toast;
 
 import com.sawaaid.malltemplate.connection.Request;
 import com.sawaaid.malltemplate.connection.RequestListener;
-import com.sawaaid.malltemplate.connection.response.RespInsert;
+import com.sawaaid.malltemplate.connection.response.Resp;
 import com.sawaaid.malltemplate.data.DataApp;
-import com.sawaaid.malltemplate.databinding.ActivityAddAdrdessBinding;
+import com.sawaaid.malltemplate.databinding.ActivityAddAddressBinding;
+
 
 public class ActivityAddAddress extends AppCompatActivity {
 
-    ActivityAddAdrdessBinding binding;
+    ActivityAddAddressBinding binding;
     Request request;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityAddAdrdessBinding.inflate(getLayoutInflater());
+        binding = ActivityAddAddressBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         initComponent();
@@ -44,7 +45,7 @@ public class ActivityAddAddress extends AppCompatActivity {
 
     private void requestAddAddress(String locationName, String locationString) {
         binding.progressBar.setVisibility(View.VISIBLE);
-        request.insertAddress(locationString, locationName, String.valueOf(DataApp.global().getUser().id), new RequestListener<RespInsert>() {
+        request.insertAddress(locationString, locationName, String.valueOf(DataApp.global().getUser().id), new RequestListener<Resp>() {
             @Override
             public void onFinish() {
                 super.onFinish();
@@ -52,7 +53,7 @@ public class ActivityAddAddress extends AppCompatActivity {
             }
 
             @Override
-            public void onSuccess(RespInsert resp) {
+            public void onSuccess(Resp resp) {
                 super.onSuccess(resp);
                 if (resp.status) {
                     Toast.makeText(ActivityAddAddress.this, "تم إضافة عنوان بنجاح", Toast.LENGTH_LONG).show();

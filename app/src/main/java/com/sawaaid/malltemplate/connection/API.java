@@ -3,7 +3,7 @@ package com.sawaaid.malltemplate.connection;
 
 import com.sawaaid.malltemplate.connection.response.RespAddress;
 import com.sawaaid.malltemplate.connection.response.RespAds;
-import com.sawaaid.malltemplate.connection.response.RespInsert;
+import com.sawaaid.malltemplate.connection.response.Resp;
 import com.sawaaid.malltemplate.connection.response.RespProduct;
 import com.sawaaid.malltemplate.connection.response.RespSections;
 import com.sawaaid.malltemplate.connection.response.RespSubSection;
@@ -14,6 +14,7 @@ import java.util.HashMap;
 
 import retrofit2.Call;
 
+import retrofit2.http.DELETE;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -57,7 +58,8 @@ public interface API {
 
     @FormUrlEncoded
     @POST("api/addLocation")
-    Call<RespInsert> insertAddress(@FieldMap HashMap<String, String> map);
+    Call<Resp> insertAddress(@FieldMap HashMap<String, String> map);
 
-
+    @DELETE("api/deleteLocation/{id}")
+    Call<Resp> deleteAddress(@Path("id") String id);
 }

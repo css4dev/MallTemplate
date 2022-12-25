@@ -5,7 +5,7 @@ import androidx.annotation.NonNull;
 
 import com.sawaaid.malltemplate.connection.response.RespAddress;
 import com.sawaaid.malltemplate.connection.response.RespAds;
-import com.sawaaid.malltemplate.connection.response.RespInsert;
+import com.sawaaid.malltemplate.connection.response.Resp;
 import com.sawaaid.malltemplate.connection.response.RespProduct;
 import com.sawaaid.malltemplate.connection.response.RespSections;
 import com.sawaaid.malltemplate.connection.response.RespSubSection;
@@ -294,16 +294,16 @@ public class Request {
         });
     }
 
-    public void insertAddress(String locationString, String locationName, String userId, RequestListener<RespInsert> listener) {
+    public void insertAddress(String locationString, String locationName, String userId, RequestListener<Resp> listener) {
         HashMap<String, String> map = new HashMap<>();
         map.put("locationString", locationString);
         map.put("locationName", locationName);
         map.put("userId", userId);
-        Call<RespInsert> callbackCall = api.insertAddress(map);
-        callbackCall.enqueue(new Callback<RespInsert>() {
+        Call<Resp> callbackCall = api.insertAddress(map);
+        callbackCall.enqueue(new Callback<Resp>() {
             @Override
-            public void onResponse(@NonNull Call<RespInsert> call, @NonNull Response<RespInsert> response) {
-                RespInsert resp = response.body();
+            public void onResponse(@NonNull Call<Resp> call, @NonNull Response<Resp> response) {
+                Resp resp = response.body();
                 listener.onFinish();
                 if (resp == null) {
                     listener.onFailed(null);
@@ -318,7 +318,34 @@ public class Request {
             }
 
             @Override
-            public void onFailure(@NonNull Call<RespInsert> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<Resp> call, @NonNull Throwable t) {
+                listener.onFinish();
+                listener.onFailed(t.getMessage());
+            }
+        });
+    }
+
+    public void deleteAddress(int id, RequestListener<Resp> listener) {
+        Call<Resp> callbackCall = api.deleteAddress(String.valueOf(id));
+        callbackCall.enqueue(new Callback<Resp>() {
+            @Override
+            public void onResponse(@NonNull Call<Resp> call, @NonNull Response<Resp> response) {
+                Resp resp = response.body();
+                listener.onFinish();
+                if (resp == null) {
+                    listener.onFailed(null);
+                } else {
+                    if (resp.code != 200) {
+                        listener.onFailed(resp.message);
+                    } else {
+                        listener.onSuccess(resp);
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Resp> call, @NonNull Throwable t) {
                 listener.onFinish();
                 listener.onFailed(t.getMessage());
             }
