@@ -64,7 +64,7 @@ public class AdapterAddresses extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder vh;
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_section, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_address, parent, false);
 
         vh = new AdapterAddresses.ViewHolder(v);
         return vh;
