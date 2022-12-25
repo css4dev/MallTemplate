@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import com.sawaaid.malltemplate.connection.response.RespAddress;
 import com.sawaaid.malltemplate.connection.response.RespAds;
 import com.sawaaid.malltemplate.connection.response.Resp;
+import com.sawaaid.malltemplate.connection.response.RespNotificationHistory;
 import com.sawaaid.malltemplate.connection.response.RespProduct;
 import com.sawaaid.malltemplate.connection.response.RespSections;
 import com.sawaaid.malltemplate.connection.response.RespSubSection;
@@ -346,6 +347,33 @@ public class Request {
 
             @Override
             public void onFailure(@NonNull Call<Resp> call, @NonNull Throwable t) {
+                listener.onFinish();
+                listener.onFailed(t.getMessage());
+            }
+        });
+    }
+
+    public void notificationHistory(String page, RequestListener<RespNotificationHistory> listener) {
+        Call<RespNotificationHistory> callbackCall = api.notificationHistory(page);
+        callbackCall.enqueue(new Callback<RespNotificationHistory>() {
+            @Override
+            public void onResponse(@NonNull Call<RespNotificationHistory> call, @NonNull Response<RespNotificationHistory> response) {
+                RespNotificationHistory resp = response.body();
+                listener.onFinish();
+                if (resp == null) {
+                    listener.onFailed(null);
+                } else {
+                    if (resp.code != 200) {
+                        listener.onFailed(resp.message);
+                    } else {
+                        listener.onSuccess(resp);
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<RespNotificationHistory> call, @NonNull Throwable t) {
                 listener.onFinish();
                 listener.onFailed(t.getMessage());
             }

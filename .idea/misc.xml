@@ -37,6 +37,7 @@
         <entry key="..\:/Android Awesome Projects/MallTemplate/app/src/main/res/layout/activity_choose_location.xml" value="0.184375" />
         <entry key="..\:/Android Awesome Projects/MallTemplate/app/src/main/res/layout/activity_login.xml" value="0.184375" />
         <entry key="..\:/Android Awesome Projects/MallTemplate/app/src/main/res/layout/activity_main.xml" value="0.184375" />
+        <entry key="..\:/Android Awesome Projects/MallTemplate/app/src/main/res/layout/activity_notification_history.xml" value="0.184375" />
         <entry key="..\:/Android Awesome Projects/MallTemplate/app/src/main/res/layout/activity_product_details.xml" value="0.16666666666666666" />
         <entry key="..\:/Android Awesome Projects/MallTemplate/app/src/main/res/layout/activity_search.xml" value="0.20989583333333334" />
         <entry key="..\:/Android Awesome Projects/MallTemplate/app/src/main/res/layout/activity_section_products.xml" value="0.1703125" />
@@ -48,10 +49,12 @@
         <entry key="..\:/Android Awesome Projects/MallTemplate/app/src/main/res/layout/fragment_cart.xml" value="0.184375" />
         <entry key="..\:/Android Awesome Projects/MallTemplate/app/src/main/res/layout/fragment_favorite.xml" value="0.1703125" />
         <entry key="..\:/Android Awesome Projects/MallTemplate/app/src/main/res/layout/fragment_home.xml" value="0.22" />
+        <entry key="..\:/Android Awesome Projects/MallTemplate/app/src/main/res/layout/fragment_sections.xml" value="0.1" />
         <entry key="..\:/Android Awesome Projects/MallTemplate/app/src/main/res/layout/fragment_user.xml" value="0.1703125" />
         <entry key="..\:/Android Awesome Projects/MallTemplate/app/src/main/res/layout/item_address.xml" value="0.1" />
         <entry key="..\:/Android Awesome Projects/MallTemplate/app/src/main/res/layout/item_cart.xml" value="0.184375" />
         <entry key="..\:/Android Awesome Projects/MallTemplate/app/src/main/res/layout/item_loading.xml" value="0.184375" />
+        <entry key="..\:/Android Awesome Projects/MallTemplate/app/src/main/res/layout/item_notification_history.xml" value="0.184375" />
         <entry key="..\:/Android Awesome Projects/MallTemplate/app/src/main/res/layout/item_product.xml" value="0.18333333333333332" />
         <entry key="..\:/Android Awesome Projects/MallTemplate/app/src/main/res/layout/item_product_home.xml" value="0.184375" />
         <entry key="..\:/Android Awesome Projects/MallTemplate/app/src/main/res/layout/item_section.xml" value="0.184375" />

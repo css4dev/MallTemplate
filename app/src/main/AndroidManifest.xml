@@ -26,6 +26,9 @@
             android:name=".ActivitySplash"
             android:exported="false" />
         <activity
+            android:name=".ActivityChooseAddress"
+            android:exported="false" />
+        <activity
             android:name=".ActivityAddAddress"
             android:exported="false" />
         <activity
@@ -47,7 +50,7 @@
             android:name=".ActivityMain"
             android:exported="false" />
         <activity
-            android:name=".ActivityChooseAddress"
+            android:name=".ActivityNotificationHistory"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

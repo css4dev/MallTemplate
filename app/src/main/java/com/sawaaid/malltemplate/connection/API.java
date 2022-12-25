@@ -4,6 +4,7 @@ package com.sawaaid.malltemplate.connection;
 import com.sawaaid.malltemplate.connection.response.RespAddress;
 import com.sawaaid.malltemplate.connection.response.RespAds;
 import com.sawaaid.malltemplate.connection.response.Resp;
+import com.sawaaid.malltemplate.connection.response.RespNotificationHistory;
 import com.sawaaid.malltemplate.connection.response.RespProduct;
 import com.sawaaid.malltemplate.connection.response.RespSections;
 import com.sawaaid.malltemplate.connection.response.RespSubSection;
@@ -45,6 +46,9 @@ public interface API {
 
     @GET("api/searchProducts/{word}/{page}")
     Call<RespProduct> search(@Path("word") String word, @Path("page") String page);
+
+    @GET("api/notification/{page}")
+    Call<RespNotificationHistory> notificationHistory(@Path("page") String page);
 
     @GET("api/subSections/{sectionId}")
     Call<RespSubSection> subSections(@Path("sectionId") String sectionId);
