@@ -26,7 +26,8 @@ public class ActivitySignUp extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_actitvity_sign_up);
+        binding = ActivityActitvitySignUpBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         initComponent();
     }
@@ -47,26 +48,30 @@ public class ActivitySignUp extends AppCompatActivity {
     }
 
     private void delayAndRequest() {
+        binding.progressBar.setVisibility(View.VISIBLE);
         String email, phoneNumber, token;
+        token = DataApp.pref().getFcmRegId();
+
+
         if (TextUtils.isEmpty(binding.EmailEditText.getText().toString())) {
             email = "0";
         } else {
             email = binding.EmailEditText.getText().toString();
         }
-
         if (TextUtils.isEmpty(binding.phoneNumberEditText.getText().toString())) {
             phoneNumber = "0";
         } else {
             phoneNumber = binding.phoneNumberEditText.getText().toString();
         }
-
-        token = DataApp.pref().getFcmRegId();
+        if (token == null)
+            token = "";
 
         request.signUp(email, binding.NameEditText.getText().toString(),
                 binding.PasswordEditText.getText().toString(), phoneNumber, token, new RequestListener<RespUser>() {
                     @Override
                     public void onFinish() {
                         super.onFinish();
+                        binding.progressBar.setVisibility(View.INVISIBLE);
                     }
 
                     @Override
@@ -81,7 +86,6 @@ public class ActivitySignUp extends AppCompatActivity {
                     @Override
                     public void onFailed(String messages) {
                         super.onFailed(messages);
-                        Log.d("TAGbv", "onFailed: " + messages);
                     }
                 });
     }

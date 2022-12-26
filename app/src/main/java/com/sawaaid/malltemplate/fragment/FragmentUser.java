@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sawaaid.malltemplate.ActivityContactUs;
+import com.sawaaid.malltemplate.ActivityLogin;
 import com.sawaaid.malltemplate.ActivityMain;
 import com.sawaaid.malltemplate.ActivityNotificationHistory;
 import com.sawaaid.malltemplate.ActivityOrders;
@@ -74,7 +75,20 @@ public class FragmentUser extends Fragment {
         });
         binding.storeInfoLinearLayout.setOnClickListener(view -> startActivity(new Intent(context, ActivityContactUs.class)));
         binding.aboutAppLinearLayout.setOnClickListener(view -> startActivity(new Intent(context, ActivitySawaaid.class)));
-        binding.logoutLinearLayout.setOnClickListener(view -> showDialogLogout());
+        binding.logoutLinearLayout.setOnClickListener(view -> {
+            if (DataApp.global().isLogin())
+                showDialogLogout();
+            else {
+                Intent intent = new Intent(context, ActivityLogin.class);
+                startActivity(intent);
+            }
+        });
+
+        if (DataApp.global().isLogin()) {
+            binding.logoutTextView.setText("تسجيل الخروج");
+        } else {
+            binding.logoutTextView.setText("تسجيل الدخول");
+        }
     }
 
     private void showDialogLogout() {
