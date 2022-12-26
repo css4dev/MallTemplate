@@ -78,6 +78,6 @@ public interface API {
     @DELETE("api/deleteLocation/{id}")
     Call<Resp> deleteAddress(@Path("id") String id);
 
-    @GET("api/OrdersDetails/{orderId}")
+    @GET("api/ordersDetails/{orderId}")
     Call<RespOrderDetails> orderDetails(@Path("orderId") String orderId);
 }
