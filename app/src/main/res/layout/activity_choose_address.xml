@@ -160,9 +160,9 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:fontFamily="@font/helvetica"
                     android:gravity="center"
-                    android:visibility="gone"
                     android:text="اذا لم تقم بإضافة عناوين بعد\n انقر على المسمار في الأسفل للإضافة"
                     android:textSize="@dimen/_14sdp"
+                    android:visibility="gone"
                     app:minTextSize="@dimen/_9ssp" />
 
             </LinearLayout>

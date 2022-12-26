@@ -1,6 +1,7 @@
 package com.sawaaid.malltemplate.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,9 +11,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.sawaaid.malltemplate.ActivityChooseAddress;
 import com.sawaaid.malltemplate.ActivityMain;
 import com.sawaaid.malltemplate.R;
 import com.sawaaid.malltemplate.adapter.AdapterCart;
@@ -44,6 +47,7 @@ public class FragmentCart extends Fragment {
     String minimumOrderPrice = "50";
     ActivityMain mainActivity;
     LinearLayout parent;
+    Button button;
 
     public FragmentCart() {
     }
@@ -66,7 +70,12 @@ public class FragmentCart extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentCartBinding.inflate(getLayoutInflater());
         rootView = binding.getRoot();
-
+        button = rootView.findViewById(R.id.buttonBuy);
+        button.setOnClickListener(view -> {
+            Intent intent = new Intent(context, ActivityChooseAddress.class);
+            intent.putExtra("TOTAL_PRICE", String.valueOf(BillPrice));
+            startActivity(intent);
+        });
         parent = rootView.findViewById(R.id.parent);
         initComponent();
 

@@ -6,6 +6,7 @@ import static com.sawaaid.malltemplate.adapter.AdapterSubSections.viewArrayList;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -32,6 +33,7 @@ public class ActivityChooseAddress extends AppCompatActivity {
     ActivityChooseAddressBinding binding;
     Request request;
     AdapterAddresses adapterAddresses;
+    String locationId = "", totalPrice = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,12 +41,20 @@ public class ActivityChooseAddress extends AppCompatActivity {
         binding = ActivityChooseAddressBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        totalPrice = getIntent().getStringExtra("TOTAL_PRICE");
+        Log.d("TAGb", "onCreate: " + totalPrice);
         initComponent();
     }
 
     private void initComponent() {
         request = new Request();
-
+        binding.completePurchaseButton.setOnClickListener(view -> {
+            Intent intent = new Intent(ActivityChooseAddress.this, ActivityCompletePurchase.class);
+            intent.putExtra("LOCATION_ID", locationId);
+            intent.putExtra("TOTAL_PRICE", totalPrice);
+            startActivity(intent);
+        });
+        binding.addNewAddressButton.setOnClickListener(view -> startActivity(new Intent(ActivityChooseAddress.this, ActivityAddAddress.class)));
         requestAddresses();
     }
 
@@ -85,7 +95,7 @@ public class ActivityChooseAddress extends AppCompatActivity {
 
         adapterAddresses.setOnItemClickListener((view, obj, position) -> {
             //TODO: make variable to hold the id of address
-
+            locationId = String.valueOf(obj.id);
 
             for (ViewAddressModel v : viewArrayListAddress) {
                 v.getCardView().setBackgroundResource(R.drawable.btn_unpressed);

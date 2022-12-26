@@ -11,16 +11,20 @@ import com.sawaaid.malltemplate.connection.response.RespProduct;
 import com.sawaaid.malltemplate.connection.response.RespSections;
 import com.sawaaid.malltemplate.connection.response.RespSubSection;
 import com.sawaaid.malltemplate.connection.response.RespUser;
+import com.sawaaid.malltemplate.room.entity.EntityBasket;
 
 
 import java.util.HashMap;
+import java.util.List;
 
 import retrofit2.Call;
 
+import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
@@ -80,4 +84,8 @@ public interface API {
 
     @GET("api/ordersDetails/{orderId}")
     Call<RespOrderDetails> orderDetails(@Path("orderId") String orderId);
+
+
+    @POST("api/addOrder")
+    Call<Resp> insertOrder(@Body HashMap<String, Object> map);
 }

@@ -13,8 +13,10 @@ import com.sawaaid.malltemplate.connection.response.RespProduct;
 import com.sawaaid.malltemplate.connection.response.RespSections;
 import com.sawaaid.malltemplate.connection.response.RespSubSection;
 import com.sawaaid.malltemplate.connection.response.RespUser;
+import com.sawaaid.malltemplate.room.entity.EntityBasket;
 
 import java.util.HashMap;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -269,6 +271,45 @@ public class Request {
             }
         });
     }
+
+    public void insertOrder(List<EntityBasket> entityBasketList, String userId,
+                            String locationId,
+                            String userNotes,
+                            String totalPrice,
+                            RequestListener<Resp> listener) {
+
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("userId", userId);
+        map.put("locationId", locationId);
+        map.put("userNotes", userNotes);
+        map.put("totalPrice", totalPrice);
+        map.put("basketProducts", entityBasketList);
+        Call<Resp> callbackCall = api.insertOrder(map);
+        callbackCall.enqueue(new Callback<Resp>() {
+            @Override
+            public void onResponse(@NonNull Call<Resp> call, @NonNull Response<Resp> response) {
+                Resp resp = response.body();
+                listener.onFinish();
+                if (resp == null) {
+                    listener.onFailed(null);
+                } else {
+                    if (resp.code != 200) {
+                        listener.onFailed(resp.message);
+                    } else {
+                        listener.onSuccess(resp);
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Resp> call, @NonNull Throwable t) {
+                listener.onFinish();
+                listener.onFailed(t.getMessage());
+            }
+        });
+    }
+
 
     public void addresses(int userId, RequestListener<RespAddress> listener) {
         Call<RespAddress> callbackCall = api.addresses(String.valueOf(userId));
