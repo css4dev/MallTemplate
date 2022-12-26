@@ -47,7 +47,7 @@
             android:name=".ActivityOrderDetails"
             android:exported="false" />
         <activity
-            android:name=".ActivitySplash"
+            android:name=".ActivityOrders"
             android:exported="false" />
         <activity
             android:name=".ActivityNotificationHistory"
@@ -77,7 +77,7 @@
             android:name=".ActivityMain"
             android:exported="false" />
         <activity
-            android:name=".ActivityOrders"
+            android:name=".ActivitySplash"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

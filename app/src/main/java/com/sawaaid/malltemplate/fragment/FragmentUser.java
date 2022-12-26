@@ -54,6 +54,7 @@ public class FragmentUser extends Fragment {
     }
 
     private void initComponent() {
+        binding.progressBar.setVisibility(View.INVISIBLE);
         binding.myOrdersLinearLayout.setOnClickListener(view -> startActivity(new Intent(context, ActivityOrders.class)));
         binding.myProfileLinearLayout.setOnClickListener(view -> {
             if (DataApp.global().isLogin())
