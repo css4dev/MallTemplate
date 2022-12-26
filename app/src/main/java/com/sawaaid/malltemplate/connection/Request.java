@@ -7,6 +7,8 @@ import com.sawaaid.malltemplate.connection.response.RespAddress;
 import com.sawaaid.malltemplate.connection.response.RespAds;
 import com.sawaaid.malltemplate.connection.response.Resp;
 import com.sawaaid.malltemplate.connection.response.RespNotificationHistory;
+import com.sawaaid.malltemplate.connection.response.RespOrder;
+import com.sawaaid.malltemplate.connection.response.RespOrderDetails;
 import com.sawaaid.malltemplate.connection.response.RespProduct;
 import com.sawaaid.malltemplate.connection.response.RespSections;
 import com.sawaaid.malltemplate.connection.response.RespSubSection;
@@ -374,6 +376,63 @@ public class Request {
 
             @Override
             public void onFailure(@NonNull Call<RespNotificationHistory> call, @NonNull Throwable t) {
+                listener.onFinish();
+                listener.onFailed(t.getMessage());
+            }
+        });
+    }
+
+    public void orders(String page, String userId, RequestListener<RespOrder> listener) {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("page", page);
+        map.put("userId", userId);
+        Call<RespOrder> callbackCall = api.orders(map);
+        callbackCall.enqueue(new Callback<RespOrder>() {
+            @Override
+            public void onResponse(@NonNull Call<RespOrder> call, @NonNull Response<RespOrder> response) {
+                RespOrder resp = response.body();
+                listener.onFinish();
+                if (resp == null) {
+                    listener.onFailed(null);
+                } else {
+                    if (resp.code != 200) {
+                        listener.onFailed(resp.message);
+                    } else {
+                        listener.onSuccess(resp);
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<RespOrder> call, @NonNull Throwable t) {
+                listener.onFinish();
+                listener.onFailed(t.getMessage());
+            }
+        });
+    }
+
+    public void orderDetails(int orderId, RequestListener<RespOrderDetails> listener) {
+        Call<RespOrderDetails> callbackCall = api.orderDetails(String.valueOf(orderId));
+        callbackCall.enqueue(new Callback<RespOrderDetails>() {
+            @Override
+            public void onResponse(@NonNull Call<RespOrderDetails> call, @NonNull Response<RespOrderDetails> response) {
+                RespOrderDetails resp = response.body();
+                listener.onFinish();
+                if (resp == null) {
+                    listener.onFailed(null);
+                } else {
+                    if (resp.code != 200) {
+                        listener.onFailed(resp.message);
+                    } else {
+                        listener.onSuccess(resp);
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<RespOrderDetails> call, @NonNull Throwable t) {
                 listener.onFinish();
                 listener.onFailed(t.getMessage());
             }

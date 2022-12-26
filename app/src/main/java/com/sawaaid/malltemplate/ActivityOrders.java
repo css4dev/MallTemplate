@@ -3,59 +3,64 @@ package com.sawaaid.malltemplate;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
 import com.sawaaid.malltemplate.adapter.AdapterListener;
-import com.sawaaid.malltemplate.adapter.AdapterNotificationHistory;
+import com.sawaaid.malltemplate.adapter.AdapterOrders;
 import com.sawaaid.malltemplate.connection.Request;
 import com.sawaaid.malltemplate.connection.RequestListener;
-import com.sawaaid.malltemplate.connection.response.RespNotificationHistory;
+import com.sawaaid.malltemplate.connection.response.RespOrder;
 import com.sawaaid.malltemplate.data.Constant;
-import com.sawaaid.malltemplate.databinding.ActivityNotificationHistoryBinding;
-import com.sawaaid.malltemplate.model.NotificationHistory;
+import com.sawaaid.malltemplate.data.DataApp;
+import com.sawaaid.malltemplate.databinding.ActivityOrdersBinding;
+import com.sawaaid.malltemplate.model.Order;
 
 import java.util.List;
 
-public class ActivityNotificationHistory extends AppCompatActivity {
-    ActivityNotificationHistoryBinding binding;
+public class ActivityOrders extends AppCompatActivity {
+
+    ActivityOrdersBinding binding;
+    AdapterOrders adapterOrders;
     Request request;
-    AdapterNotificationHistory adapterNotificationHistory;
     private boolean allLoaded = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityNotificationHistoryBinding.inflate(getLayoutInflater());
+        binding = ActivityOrdersBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         initComponent();
 
         requestAction(1);
-
     }
 
-    private void requestAction(int page) {
-        adapterNotificationHistory.setLoadingOrFailed(null);
-        requestNotificationHistory(page);
+    private void requestAction(int page_no) {
+        adapterOrders.setLoadingOrFailed(null);
+        requestOrders(page_no);
     }
 
     private void initComponent() {
-        binding.progressBar.setVisibility(View.VISIBLE);
         request = new Request();
-        binding.backButton.setOnClickListener(view -> onBackPressed());
+        binding.progressBar.setVisibility(View.VISIBLE);
+        binding.noOrdersTextView.setVisibility(View.INVISIBLE);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         binding.recyclerView.setHasFixedSize(true);
-        adapterNotificationHistory = new AdapterNotificationHistory(this, binding.recyclerView, Constant.LISTING_PAGE);
-        binding.recyclerView.setAdapter(adapterNotificationHistory);
-        adapterNotificationHistory.setListener(new AdapterListener<NotificationHistory>() {
+        adapterOrders = new AdapterOrders(this, binding.recyclerView, Constant.LISTING_PAGE);
+        binding.recyclerView.setAdapter(adapterOrders);
+        adapterOrders.setListener(new AdapterListener<Order>() {
             @Override
-            public void onClick(View view, String type, NotificationHistory obj, int position) {
+            public void onClick(View view, String type, Order obj, int position) {
                 super.onClick(view, type, obj, position);
+                Intent intent = new Intent(ActivityOrders.this, ActivityOrderDetails.class);
+                intent.putExtra("ORDER_ID", obj.id);
+                startActivity(intent);
             }
 
             @Override
-            public void onSavedClick(View view, boolean saved, NotificationHistory obj, int position) {
+            public void onSavedClick(View view, boolean saved, Order obj, int position) {
                 super.onSavedClick(view, saved, obj, position);
             }
 
@@ -63,7 +68,7 @@ public class ActivityNotificationHistory extends AppCompatActivity {
             public void onLoadMore(int page) {
                 super.onLoadMore(page);
                 if (allLoaded) {
-                    adapterNotificationHistory.setLoaded();
+                    adapterOrders.setLoaded();
                 } else {
                     int next_page = page + 1;
                     requestAction(next_page);
@@ -72,8 +77,8 @@ public class ActivityNotificationHistory extends AppCompatActivity {
         });
     }
 
-    private void requestNotificationHistory(int page_no) {
-        request.notificationHistory(String.valueOf(page_no), new RequestListener<RespNotificationHistory>() {
+    private void requestOrders(int page) {
+        request.orders(String.valueOf(page), String.valueOf(DataApp.global().getUser().id), new RequestListener<RespOrder>() {
             @Override
             public void onFinish() {
                 super.onFinish();
@@ -81,10 +86,14 @@ public class ActivityNotificationHistory extends AppCompatActivity {
             }
 
             @Override
-            public void onSuccess(RespNotificationHistory resp) {
+            public void onSuccess(RespOrder resp) {
                 super.onSuccess(resp);
                 allLoaded = resp.data.size() < Constant.LISTING_PAGE;
                 displayApiResult(resp.data);
+                binding.totalOrdersNumberTextView.setText(resp.data.size() + "");
+                if (resp.data.size() == 0) {
+                    binding.noOrdersTextView.setVisibility(View.VISIBLE);
+                }
             }
 
             @Override
@@ -94,7 +103,7 @@ public class ActivityNotificationHistory extends AppCompatActivity {
         });
     }
 
-    private void displayApiResult(List<NotificationHistory> data) {
-        adapterNotificationHistory.insertData(data);
+    private void displayApiResult(List<Order> data) {
+        adapterOrders.insertData(data);
     }
 }

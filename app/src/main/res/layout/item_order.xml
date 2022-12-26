@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layoutDirection="rtl"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:id="@+id/orderLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <me.grantland.widget.AutofitTextView
+            android:id="@+id/orderNumberTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.8"
+            android:fontFamily="@font/helvetica"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="1"
+            android:textSize="@dimen/_14ssp"
+            app:minTextSize="@dimen/_12ssp" />
+
+        <me.grantland.widget.AutofitTextView
+            android:id="@+id/orderDateTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.2"
+            android:fontFamily="@font/helvetica"
+            android:gravity="right"
+            android:maxLines="1"
+            android:text="20/09/2021 "
+            android:textSize="@dimen/_14ssp"
+            app:minTextSize="@dimen/_12ssp" />
+
+        <me.grantland.widget.AutofitTextView
+            android:id="@+id/orderTotalPriceTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/helvetica"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="125 ليرة تركي"
+            android:textSize="@dimen/_14ssp"
+            app:minTextSize="@dimen/_12ssp" />
+
+        <me.grantland.widget.AutofitTextView
+            android:id="@+id/orderStatusTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.2"
+            android:fontFamily="@font/helvetica"
+            android:gravity="center"
+            android:text="تم التسليم"
+            android:maxLines="1"
+            android:textColor="@color/orang"
+            android:textSize="@dimen/_14ssp"
+            app:minTextSize="@dimen/_12ssp" />
+
+    </LinearLayout>
+
+</RelativeLayout>

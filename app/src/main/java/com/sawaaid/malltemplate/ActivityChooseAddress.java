@@ -50,7 +50,7 @@ public class ActivityChooseAddress extends AppCompatActivity {
 
     private void requestAddresses() {
         binding.progressBar.setVisibility(View.VISIBLE);
-        request.addresses(166, new RequestListener<RespAddress>() {
+        request.addresses(DataApp.global().getUser().id, new RequestListener<RespAddress>() {
             @Override
             public void onFinish() {
                 super.onFinish();

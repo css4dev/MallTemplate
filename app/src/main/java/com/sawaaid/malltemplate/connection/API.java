@@ -5,6 +5,8 @@ import com.sawaaid.malltemplate.connection.response.RespAddress;
 import com.sawaaid.malltemplate.connection.response.RespAds;
 import com.sawaaid.malltemplate.connection.response.Resp;
 import com.sawaaid.malltemplate.connection.response.RespNotificationHistory;
+import com.sawaaid.malltemplate.connection.response.RespOrder;
+import com.sawaaid.malltemplate.connection.response.RespOrderDetails;
 import com.sawaaid.malltemplate.connection.response.RespProduct;
 import com.sawaaid.malltemplate.connection.response.RespSections;
 import com.sawaaid.malltemplate.connection.response.RespSubSection;
@@ -50,6 +52,7 @@ public interface API {
     @GET("api/notification/{page}")
     Call<RespNotificationHistory> notificationHistory(@Path("page") String page);
 
+
     @GET("api/subSections/{sectionId}")
     Call<RespSubSection> subSections(@Path("sectionId") String sectionId);
 
@@ -64,6 +67,13 @@ public interface API {
     @POST("api/addLocation")
     Call<Resp> insertAddress(@FieldMap HashMap<String, String> map);
 
+    @FormUrlEncoded
+    @POST("api/userOrder")
+    Call<RespOrder> orders(@FieldMap HashMap<String, String> map);
+
     @DELETE("api/deleteLocation/{id}")
     Call<Resp> deleteAddress(@Path("id") String id);
+
+    @GET("api/OrdersDetails/{orderId}")
+    Call<RespOrderDetails> orderDetails(@Path("orderId") String orderId);
 }

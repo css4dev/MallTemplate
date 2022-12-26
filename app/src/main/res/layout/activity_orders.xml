@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="rtl"
+    tools:context=".ActivityOrders">
+
+    <me.grantland.widget.AutofitTextView
+        android:id="@+id/noOrdersTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:fontFamily="@font/helvetica"
+        android:maxLines="1"
+        android:paddingBottom="@dimen/_4sdp"
+        android:text="لا يوجد طلبات بعد"
+        android:textSize="@dimen/_20ssp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_44sdp"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_45sdp"
+        android:layout_alignParentBottom="true"
+        android:elevation="5dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/_8sdp"
+        android:paddingRight="@dimen/_16sdp">
+
+
+        <me.grantland.widget.AutofitTextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_gravity="right|center_vertical"
+            android:fontFamily="@font/helvetica"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:text="العدد الكلي للطلبات"
+            android:textSize="@dimen/_14ssp"
+            app:minTextSize="@dimen/_12ssp" />
+
+        <me.grantland.widget.AutofitTextView
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_gravity="right|center_vertical"
+            android:layout_weight="1"
+            android:fontFamily="@font/helvetica"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="-------------------------"
+            android:textSize="@dimen/_14ssp"
+            app:minTextSize="@dimen/_12ssp" />
+
+        <me.grantland.widget.AutofitTextView
+            android:id="@+id/totalOrdersNumberTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_gravity="left|center_vertical"
+            android:layout_marginLeft="@dimen/_12sdp"
+            android:fontFamily="@font/helvetica"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:textSize="@dimen/_16ssp"
+            android:textStyle="bold"
+            app:minTextSize="@dimen/_14ssp" />
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:translationZ="20dp"
+        android:visibility="visible">
+
+    </ProgressBar>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/_8sdp"
+        android:layout_marginRight="@dimen/_8sdp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/backButton"
+                android:layout_width="@dimen/_18sdp"
+                android:layout_height="@dimen/_18sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginRight="@dimen/_4sdp"
+                android:background="@drawable/ic_right_arrow" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_32sdp"
+                android:layout_marginLeft="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:layout_marginRight="@dimen/_8sdp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <me.grantland.widget.AutofitTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/helvetica"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="العنوان"
+                    android:textColor="@color/textWhite"
+                    android:textSize="@dimen/_16ssp" />
+            </LinearLayout>
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_30sdp"
+                android:background="@drawable/border_top_table"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <me.grantland.widget.AutofitTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.8"
+                    android:fontFamily="@font/helvetica"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="الرقم"
+                    android:textColor="@color/textWhite"
+                    android:textSize="@dimen/_12ssp"
+                    app:minTextSize="@dimen/_10ssp" />
+
+                <me.grantland.widget.AutofitTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.2"
+                    android:fontFamily="@font/helvetica"
+                    android:gravity="right"
+                    android:maxLines="1"
+                    android:text="تاريخ الطلب"
+                    android:textColor="@color/textWhite"
+                    android:textSize="@dimen/_12ssp"
+                    app:minTextSize="@dimen/_10ssp" />
+
+                <me.grantland.widget.AutofitTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/helvetica"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="السعر الكلي"
+                    android:textColor="@color/textWhite"
+                    android:textSize="@dimen/_12ssp"
+                    app:minTextSize="@dimen/_10ssp" />
+
+                <me.grantland.widget.AutofitTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.2"
+                    android:fontFamily="@font/helvetica"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="الحالة"
+                    android:textColor="@color/textWhite"
+                    android:textSize="@dimen/_12ssp"
+                    app:minTextSize="@dimen/_10ssp" />
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </androidx.recyclerview.widget.RecyclerView>
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>
