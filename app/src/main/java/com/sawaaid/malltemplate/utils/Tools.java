@@ -88,7 +88,7 @@ public class Tools {
             stream.flush();
             stream.close();
             uri = FileProvider.getUriForFile(Objects.requireNonNull(context.getApplicationContext()),
-                    "com.smartservicescompany.shamschoolteachers" + ".provider", file);
+                    "com.sawaaid.malltemplate" + ".provider", file);
         } catch (Throwable ignored) {
 
         }
