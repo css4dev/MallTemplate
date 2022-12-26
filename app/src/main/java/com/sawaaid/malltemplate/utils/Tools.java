@@ -55,15 +55,15 @@ public class Tools {
         } catch (Exception ignored) {
         }
     }
-/*
+
     public static void methodShare(Activity act, ProgressBar progressBar, androidx.appcompat.app.AlertDialog alertDialog) {
         try {
-            Bitmap image = BitmapFactory.decodeResource(act.getResources(), R.drawable.logo_sham_trans);
+            Bitmap image = BitmapFactory.decodeResource(act.getResources(), R.drawable.ic_launcher_foreground);
             Uri uri = saveImage(image, act);
             // string to share
-            String body = act.getString(R.string.app_name_share) + "\n" + act.getString(R.string.share_text);
+            String body = act.getString(R.string.app_name) + "\n" + act.getString(R.string.share_text);
             Intent sharingIntent = new Intent(Intent.ACTION_SEND);
-            sharingIntent.putExtra(Intent.EXTRA_SUBJECT, act.getString(R.string.app_name_share));
+            sharingIntent.putExtra(Intent.EXTRA_SUBJECT, act.getString(R.string.app_name));
             sharingIntent.putExtra(Intent.EXTRA_TEXT, body);
             sharingIntent.putExtra(Intent.EXTRA_STREAM, uri);
             sharingIntent.setType("image/*");
@@ -76,7 +76,6 @@ public class Tools {
         }
     }
 
- */
 
     private static Uri saveImage(Bitmap image, Context context) {
         File imagesFolder = new File(context.getCacheDir(), "images");

@@ -1,13 +1,379 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layoutDirection="rtl"
     tools:context=".fragment.FragmentUser">
 
-    <TextView
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:translationZ="20dp"
+        android:visibility="visible">
+
+    </ProgressBar>
+
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical">
 
-</FrameLayout>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/_50sdp"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_8sdp"
+                android:layout_marginRight="@dimen/_8sdp"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/profile_pic"
+                        android:layout_width="@dimen/_80sdp"
+                        android:layout_height="@dimen/_80sdp"
+                        android:layout_gravity="center"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_my_info" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_minus7sdp"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical">
+
+                        <me.grantland.widget.AutofitTextView
+                            android:id="@+id/userNameTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/helvetica"
+                            android:gravity="center"
+                            android:maxLines="1"
+                            android:text="ضيف"
+                            android:textSize="@dimen/_16ssp"
+                            app:minTextSize="@dimen/_12sdp" />
+
+                        <me.grantland.widget.AutofitTextView
+                            android:id="@+id/emailTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/CardView_image_section"
+                            android:fontFamily="@font/helvetica"
+                            android:gravity="center"
+                            android:maxLines="1"
+                            android:text="يرجى تسجيل الدخول"
+                            android:textSize="@dimen/_10ssp"
+                            app:minTextSize="@dimen/_10sdp" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/myOrdersLinearLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="20dp"
+                            android:layout_marginRight="@dimen/_4sdp"
+                            android:background="@drawable/ic_order" />
+
+                        <me.grantland.widget.AutofitTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/helvetica"
+                            android:gravity="right|center_vertical"
+                            android:maxLines="1"
+                            android:paddingRight="@dimen/_8sdp"
+                            android:text="سجل الطلبات"
+                            android:textSize="@dimen/_15ssp" />
+
+                        <ImageView
+                            android:layout_width="@dimen/_13ssp"
+                            android:layout_height="@dimen/_13ssp"
+                            android:layout_marginLeft="@dimen/_8sdp"
+                            android:background="@drawable/ic_arrow_bottom" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp" />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp" />
+
+                    <LinearLayout
+                        android:id="@+id/myProfileLinearLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:layout_marginRight="@dimen/_4sdp"
+                            android:background="@drawable/ic_profile"
+                            android:backgroundTint="@color/textColor2" />
+
+                        <me.grantland.widget.AutofitTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/helvetica"
+                            android:gravity="right|center_vertical"
+                            android:maxLines="1"
+                            android:paddingRight="@dimen/_8sdp"
+                            android:text="الملف الشخصي"
+                            android:textSize="@dimen/_15ssp" />
+
+                        <ImageView
+                            android:layout_width="@dimen/_13ssp"
+                            android:layout_height="@dimen/_13ssp"
+                            android:layout_marginLeft="@dimen/_8sdp"
+                            android:background="@drawable/ic_arrow_bottom"
+                            android:backgroundTint="@color/textColor2" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp" />
+
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp" />
+
+                    <LinearLayout
+                        android:id="@+id/notificationLinearLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:layout_marginRight="@dimen/_4sdp"
+                            android:background="@drawable/ic_notification"
+                            android:backgroundTint="@color/textColor2" />
+
+                        <me.grantland.widget.AutofitTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/helvetica"
+                            android:gravity="right|center_vertical"
+                            android:maxLines="1"
+                            android:paddingRight="@dimen/_8sdp"
+                            android:text="الإشعارات"
+                            android:textSize="@dimen/_15ssp" />
+
+                        <ImageView
+                            android:layout_width="@dimen/_13ssp"
+                            android:layout_height="@dimen/_13ssp"
+                            android:layout_marginLeft="@dimen/_8sdp"
+                            android:background="@drawable/ic_arrow_bottom"
+                            android:backgroundTint="@color/textColor2" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp" />
+
+                    <LinearLayout
+                        android:id="@+id/linearShareApp"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:layout_marginRight="@dimen/_4sdp"
+                            android:background="@drawable/ic_share"
+                            android:backgroundTint="@color/textColor2" />
+
+                        <me.grantland.widget.AutofitTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/helvetica"
+                            android:gravity="right|center_vertical"
+                            android:maxLines="1"
+                            android:paddingRight="@dimen/_8sdp"
+                            android:text="مشاركة التطبيق"
+                            android:textSize="@dimen/_15ssp" />
+
+                        <ImageView
+                            android:layout_width="@dimen/_13ssp"
+                            android:layout_height="@dimen/_13ssp"
+                            android:layout_marginLeft="@dimen/_8sdp"
+                            android:background="@drawable/ic_arrow_bottom"
+                            android:backgroundTint="@color/textColor2" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp" />
+
+                    <LinearLayout
+                        android:id="@+id/storeInfoLinearLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:layout_marginRight="@dimen/_4sdp"
+                            android:background="@drawable/ic_phone"
+
+                            />
+
+                        <me.grantland.widget.AutofitTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/helvetica"
+                            android:gravity="right|center_vertical"
+                            android:maxLines="1"
+                            android:paddingRight="@dimen/_8sdp"
+                            android:text="معلومات تواصل مع المول"
+                            android:textSize="@dimen/_15ssp" />
+
+                        <ImageView
+                            android:layout_width="@dimen/_13ssp"
+                            android:layout_height="@dimen/_13ssp"
+                            android:layout_marginLeft="@dimen/_8sdp"
+                            android:background="@drawable/ic_arrow_bottom"
+                            android:backgroundTint="@color/textColor2" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp" />
+
+
+                    <LinearLayout
+                        android:id="@+id/aboutAppLinearLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:layout_marginRight="@dimen/_4sdp"
+                            android:background="@drawable/ic_info"
+                            android:backgroundTint="@color/textColor2" />
+
+                        <me.grantland.widget.AutofitTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/helvetica"
+                            android:gravity="right|center_vertical"
+                            android:maxLines="1"
+                            android:paddingRight="@dimen/_8sdp"
+                            android:text="الشركة المطورة"
+                            android:textSize="@dimen/_15ssp" />
+
+                        <ImageView
+                            android:id="@+id/logo_text"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_13ssp"
+                            android:layout_marginLeft="@dimen/_70sdp" />
+
+                        <ImageView
+                            android:layout_width="@dimen/_13ssp"
+                            android:layout_height="@dimen/_13ssp"
+                            android:layout_marginLeft="@dimen/_8sdp"
+                            android:background="@drawable/ic_arrow_bottom"
+                            android:backgroundTint="@color/textColor2" />
+                    </LinearLayout>
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp" />
+
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp" />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp" />
+
+                    <LinearLayout
+                        android:id="@+id/logoutLinearLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:layout_marginTop="@dimen/_3sdp"
+                            android:layout_marginRight="@dimen/_4sdp"
+                            android:background="@drawable/ic_logout_icon"
+                            android:backgroundTint="@color/textColor2"
+                            android:rotation="180" />
+
+                        <me.grantland.widget.AutofitTextView
+                            android:id="@+id/logoutTextView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/helvetica"
+                            android:gravity="right|center_vertical"
+                            android:maxLines="1"
+                            android:paddingRight="@dimen/_8sdp"
+                            android:text="تسجيل الخروج"
+                            android:textSize="@dimen/_15ssp" />
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+
+</RelativeLayout>
