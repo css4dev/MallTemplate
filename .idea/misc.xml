@@ -24,6 +24,7 @@
         <entry key="..\:/Android Awesome Projects/MallTemplate/app/src/main/res/drawable-v24/ic_phone_small.xml" value="0.1" />
         <entry key="..\:/Android Awesome Projects/MallTemplate/app/src/main/res/drawable-v24/ic_profile.xml" value="0.1" />
         <entry key="..\:/Android Awesome Projects/MallTemplate/app/src/main/res/drawable-v24/ic_share.xml" value="0.1" />
+        <entry key="..\:/Android Awesome Projects/MallTemplate/app/src/main/res/drawable-v24/ic_user_fill.xml" value="0.1" />
         <entry key="..\:/Android Awesome Projects/MallTemplate/app/src/main/res/drawable/active_dot.xml" value="0.139" />
         <entry key="..\:/Android Awesome Projects/MallTemplate/app/src/main/res/drawable/background.xml" value="0.1" />
         <entry key="..\:/Android Awesome Projects/MallTemplate/app/src/main/res/drawable/border_circle.xml" value="0.139" />
@@ -41,6 +42,7 @@
         <entry key="..\:/Android Awesome Projects/MallTemplate/app/src/main/res/drawable/quantity_border.xml" value="0.1" />
         <entry key="..\:/Android Awesome Projects/MallTemplate/app/src/main/res/drawable/selsctor_card.xml" value="0.1" />
         <entry key="..\:/Android Awesome Projects/MallTemplate/app/src/main/res/layout/active_dot.xml" value="0.184375" />
+        <entry key="..\:/Android Awesome Projects/MallTemplate/app/src/main/res/layout/activity_actitvity_sign_up.xml" value="0.184375" />
         <entry key="..\:/Android Awesome Projects/MallTemplate/app/src/main/res/layout/activity_add_adrdess.xml" value="0.22" />
         <entry key="..\:/Android Awesome Projects/MallTemplate/app/src/main/res/layout/activity_choose_address.xml" value="0.184375" />
         <entry key="..\:/Android Awesome Projects/MallTemplate/app/src/main/res/layout/activity_choose_location.xml" value="0.184375" />

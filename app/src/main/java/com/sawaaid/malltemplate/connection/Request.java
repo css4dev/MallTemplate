@@ -439,5 +439,38 @@ public class Request {
         });
     }
 
+    public void signUp(String email, String name, String password, String phoneNumber, String token, RequestListener<RespUser> listener) {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("email", email);
+        map.put("name", name);
+        map.put("password", password);
+        map.put("phoneNumber", phoneNumber);
+        map.put("token", token);
+        Call<RespUser> callbackCall = api.signUp(map);
+        callbackCall.enqueue(new Callback<RespUser>() {
+            @Override
+            public void onResponse(@NonNull Call<RespUser> call, @NonNull Response<RespUser> response) {
+                RespUser resp = response.body();
+                listener.onFinish();
+                if (resp == null) {
+                    listener.onFailed(null);
+                } else {
+                    if (resp.code != 200) {
+                        listener.onFailed(resp.message);
+                    } else {
+                        listener.onSuccess(resp);
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<RespUser> call, @NonNull Throwable t) {
+                listener.onFinish();
+                listener.onFailed(t.getMessage());
+            }
+        });
+    }
+
 
 }
