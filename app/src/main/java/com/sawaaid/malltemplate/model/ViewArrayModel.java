@@ -3,10 +3,12 @@ package com.sawaaid.malltemplate.model;
 import android.widget.RelativeLayout;
 
 
+import androidx.annotation.Keep;
+
 import java.io.Serializable;
 
 import me.grantland.widget.AutofitTextView;
-
+@Keep
 public class ViewArrayModel implements Serializable {
     AutofitTextView subSectionName;
     RelativeLayout lytParent;

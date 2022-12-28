@@ -106,6 +106,34 @@ public class Request {
         });
     }
 
+    public void favProducts(String id, String page, RequestListener<RespProduct> listener) {
+        Call<RespProduct> callbackCall = api.favoriteProducts(id, page);
+        callbackCall.enqueue(new Callback<RespProduct>() {
+            @Override
+            public void onResponse(@NonNull Call<RespProduct> call, @NonNull Response<RespProduct> response) {
+                RespProduct resp = response.body();
+                listener.onFinish();
+                if (resp == null) {
+                    listener.onFailed(null);
+                } else {
+                    if (resp.code != 200) {
+                        listener.onFailed(resp.message);
+                    } else {
+                        listener.onSuccess(resp);
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<RespProduct> call, @NonNull Throwable t) {
+                listener.onFinish();
+                listener.onFailed(t.getMessage());
+            }
+        });
+    }
+
+
     public void search(String page_no, String word, RequestListener<RespProduct> listener) {
         Call<RespProduct> callbackCall = api.search(word, page_no);
         callbackCall.enqueue(new Callback<RespProduct>() {

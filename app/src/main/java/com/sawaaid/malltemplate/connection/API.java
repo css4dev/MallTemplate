@@ -50,6 +50,9 @@ public interface API {
     @GET("api/basketProducts/{id}")
     Call<RespProduct> cartProducts(@Path("id") String id);
 
+    @GET("api/favoriteProducts/{id}/{page}")
+    Call<RespProduct> favoriteProducts(@Path("id") String id, @Path("page") String page);
+
     @GET("api/searchProducts/{word}/{page}")
     Call<RespProduct> search(@Path("word") String word, @Path("page") String page);
 
@@ -84,7 +87,6 @@ public interface API {
 
     @GET("api/ordersDetails/{orderId}")
     Call<RespOrderDetails> orderDetails(@Path("orderId") String orderId);
-
 
     @POST("api/addOrder")
     Call<Resp> insertOrder(@Body HashMap<String, Object> map);

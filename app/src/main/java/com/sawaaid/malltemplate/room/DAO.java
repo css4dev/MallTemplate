@@ -11,6 +11,7 @@ import com.sawaaid.malltemplate.model.Product;
 import com.sawaaid.malltemplate.model.Section;
 import com.sawaaid.malltemplate.model.SubSection;
 import com.sawaaid.malltemplate.room.entity.EntityBasket;
+import com.sawaaid.malltemplate.room.entity.EntityFavorite;
 
 import java.util.List;
 
@@ -32,14 +33,23 @@ public interface DAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertEntityBasket(EntityBasket productsIds);
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertFavorite(EntityFavorite productsIds);
+
     @Query("SELECT * FROM ads")
     List<Ads> getAds();
 
     @Query("SELECT * FROM entity_basket")
     List<EntityBasket> getEntityBasket();
 
+    @Query("SELECT * FROM entity_favorite")
+    List<EntityFavorite> getEntityFavorite();
+
     @Query("SELECT count(product_id) FROM entity_basket WHERE product_id = :productId")
     Integer checkProduct(Integer productId);
+
+    @Query("SELECT count(product_id) FROM entity_favorite WHERE product_id = :productId")
+    Integer checkProductFavorite(Integer productId);
 
     @Query("UPDATE entity_basket SET quantity = :quantity WHERE product_id = :productId")
     Integer updateProductQuantity(Integer productId, Double quantity);
@@ -73,6 +83,9 @@ public interface DAO {
 
     @Query("DELETE FROM entity_basket WHERE product_id = :productId")
     void deleteProductFromBasket(String productId);
+
+    @Query("DELETE FROM entity_favorite WHERE product_id = :productId")
+    void deleteProductFromFavorite(String productId);
 
     @Query("DELETE FROM product WHERE sectionId = :sectionId AND subSectionId = :subSectionId")
     void deleteSectionProducts(String sectionId, String subSectionId);

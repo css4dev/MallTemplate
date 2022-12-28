@@ -1,9 +1,11 @@
 package com.sawaaid.malltemplate;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +17,7 @@ import com.sawaaid.malltemplate.data.DataApp;
 import com.sawaaid.malltemplate.databinding.ActivityProductDetailsBinding;
 import com.sawaaid.malltemplate.model.Product;
 import com.sawaaid.malltemplate.room.entity.EntityBasket;
+import com.sawaaid.malltemplate.room.entity.EntityFavorite;
 import com.sawaaid.malltemplate.utils.Tools;
 
 import java.util.Locale;
@@ -34,6 +37,7 @@ public class ActivityProductDetails extends AppCompatActivity {
     ActivityProductDetailsBinding binding;
     double price;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +55,26 @@ public class ActivityProductDetails extends AppCompatActivity {
         request = new Request();
 
         Tools.displayImage(this, binding.image, product.photo);
+
+        checkProductFavoriteRoom(product.id);
+
         binding.backButton.setOnClickListener(view -> onBackPressed());
+        binding.addToFavorite.setOnClickListener(view -> {
+            if (checkProductFavoriteRoom(product.id) > 0) {
+                DataApp.dao().deleteProductFromFavorite(String.valueOf(product.id));
+                Drawable d = ContextCompat.getDrawable(this, R.drawable.ic_favorite_bottom);
+                binding.addToFavorite.setBackground(d);
+                Toast.makeText(this, "تم الإزالة من المفضلة بنجاح", Toast.LENGTH_SHORT).show();
+            } else {
+                EntityFavorite entityFavorite = new EntityFavorite();
+                entityFavorite.setProductId(product.id);
+                DataApp.dao().insertFavorite(entityFavorite);
+                Toast.makeText(this, "تم الإضافة إلى المفضلة بنجاح", Toast.LENGTH_SHORT).show();
+                Drawable d = ContextCompat.getDrawable(this, R.drawable.ic_baseline_favorite_24);
+                binding.addToFavorite.setBackground(d);
+            }
+        });
+
 
         if (product.priceAfterSale == 0) {
             price = product.dollarPrice;
@@ -100,6 +123,15 @@ public class ActivityProductDetails extends AppCompatActivity {
             }
 
         });
+    }
+
+    private int checkProductFavoriteRoom(int id) {
+        int productFavoriteRoom = DataApp.dao().checkProductFavorite(id);
+        if (productFavoriteRoom > 0) {
+            Drawable d = ContextCompat.getDrawable(this, R.drawable.ic_baseline_favorite_24);
+            binding.addToFavorite.setBackground(d);
+        }
+        return productFavoriteRoom;
     }
 
     private void setVisibleComponents() {

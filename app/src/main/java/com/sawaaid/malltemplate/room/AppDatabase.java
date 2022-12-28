@@ -15,9 +15,10 @@ import com.sawaaid.malltemplate.model.Section;
 import com.sawaaid.malltemplate.model.SubSection;
 import com.sawaaid.malltemplate.model.User;
 import com.sawaaid.malltemplate.room.entity.EntityBasket;
+import com.sawaaid.malltemplate.room.entity.EntityFavorite;
 
 
-@Database(entities = {Ads.class, Product.class, Section.class, SubSection.class, EntityBasket.class}, version = 1, exportSchema = false)
+@Database(entities = {Ads.class, Product.class, Section.class, SubSection.class, EntityBasket.class, EntityFavorite.class}, version = 1, exportSchema = false)
 @TypeConverters({})
 public abstract class AppDatabase extends RoomDatabase {
 

@@ -2,12 +2,13 @@ package com.sawaaid.malltemplate.model;
 
 import android.widget.Button;
 
+import androidx.annotation.Keep;
 import androidx.cardview.widget.CardView;
 
 import java.io.Serializable;
 
 import me.grantland.widget.AutofitTextView;
-
+@Keep
 public class ViewAddressModel implements Serializable {
     Button deleteButton;
     AutofitTextView locationName, locationString;

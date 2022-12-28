@@ -1,11 +1,12 @@
 package com.sawaaid.malltemplate.model;
 
+import androidx.annotation.Keep;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
-
+@Keep
 @Entity(tableName = "ads")
 public class Ads implements Serializable {
 
