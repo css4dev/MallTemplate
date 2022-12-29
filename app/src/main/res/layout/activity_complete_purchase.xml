@@ -4,14 +4,269 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layoutDirection="rtl"
     tools:context=".ActivityCompletePurchase">
 
-    <Button
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_44sdp"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_120sdp"
+        android:layout_alignParentBottom="true"
+        android:elevation="5dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/_5sdp"
+        android:paddingBottom="@dimen/_5sdp"
+        android:translationZ="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_35sdp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/_16sdp"
+            android:paddingRight="@dimen/_16sdp">
+
+
+            <me.grantland.widget.AutofitTextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_gravity="right|center_vertical"
+                android:fontFamily="@font/helvetica"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:text="أجرة التوصيل:"
+                android:textSize="@dimen/_12ssp"
+                app:minTextSize="@dimen/_10ssp" />
+
+            <me.grantland.widget.AutofitTextView
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginHorizontal="@dimen/_3sdp"
+                android:layout_weight="1"
+                android:fontFamily="@font/helvetica"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:text="---------------------------------------"
+                android:textSize="@dimen/_12ssp"
+                app:minTextSize="@dimen/_10ssp" />
+
+
+            <me.grantland.widget.AutofitTextView
+                android:id="@+id/fareTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_gravity="left|center_vertical"
+                android:fontFamily="@font/helvetica"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:textColor="@color/orang"
+                android:textSize="@dimen/_14ssp"
+                android:textStyle="bold"
+                app:minTextSize="@dimen/_14ssp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/_16sdp"
+            android:paddingRight="@dimen/_16sdp">
+
+
+            <me.grantland.widget.AutofitTextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_gravity="right|center_vertical"
+                android:fontFamily="@font/helvetica"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:text="المبلغ الإجمالي"
+                android:textSize="@dimen/_12ssp"
+                app:minTextSize="@dimen/_10ssp" />
+
+            <me.grantland.widget.AutofitTextView
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginHorizontal="@dimen/_3sdp"
+                android:layout_weight="1"
+                android:fontFamily="@font/helvetica"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:text="----------------------------"
+                android:textSize="@dimen/_12ssp"
+                app:minTextSize="@dimen/_10ssp" />
+
+
+            <me.grantland.widget.AutofitTextView
+                android:id="@+id/allPriceTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_gravity="left|center_vertical"
+                android:fontFamily="@font/helvetica"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:textColor="@color/orang"
+                android:textSize="@dimen/_14ssp"
+                android:textStyle="bold"
+                app:minTextSize="@dimen/_14ssp" />
+
+
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/buttonBuy"
+            style="@android:style/Animation"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_43sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:fontFamily="@font/helvetica"
+            android:gravity="center"
+            android:text="تأكيد عملية الشراء"
+            android:textColor="@color/textWhite"
+            android:textStyle="bold"
+            app:cornerRadius="@dimen/_10sdp" />
+
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:id="@+id/completePurchaseButton">
+        android:translationZ="20dp"
+        android:visibility="visible">
 
-    </Button>
+    </ProgressBar>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/_8sdp"
+        android:layout_marginRight="@dimen/_8sdp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/backButton"
+                android:layout_width="@dimen/_18sdp"
+                android:layout_height="@dimen/_18sdp"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:layout_marginRight="@dimen/_6sdp"
+                android:background="@drawable/ic_right_arrow" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_32sdp"
+                android:layout_marginLeft="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:layout_marginRight="@dimen/_8sdp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <me.grantland.widget.AutofitTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/helvetica"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="إكمال عملية الشراء"
+                    android:textColor="@color/textWhite"
+                    android:textSize="@dimen/_16ssp" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginBottom="@dimen/_120sdp"
+            android:translationZ="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <me.grantland.widget.AutofitTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:fontFamily="@font/helvetica"
+                    android:gravity="right"
+                    android:maxLines="1"
+                    android:text="منتجات الطلبية:"
+                    android:textSize="@dimen/_16ssp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp" />
+
+                <me.grantland.widget.AutofitTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:fontFamily="@font/helvetica"
+                    android:gravity="right"
+                    android:maxLines="1"
+                    android:text="عنوان الطلبية:"
+                    android:textSize="@dimen/_16ssp" />
+
+                <me.grantland.widget.AutofitTextView
+                    android:id="@+id/locationString"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/helvetica"
+                    android:gravity="right"
+                    android:maxLines="1"
+                    android:textSize="@dimen/_14ssp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:hint="إضافة ملاحظة للطلبية"
+                    app:errorEnabled="true"
+                    app:shapeAppearance="@style/Rounded"
+                    app:startIconTint="@color/colorPrimary">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/orderNotesEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/helvetica"
+                        android:inputType="textMultiLine"
+
+                        android:textSize="@dimen/_13ssp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
 
 </RelativeLayout>

@@ -1,66 +1,113 @@
 package com.sawaaid.malltemplate.fragment;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.sawaaid.malltemplate.ActivitySectionProducts;
 import com.sawaaid.malltemplate.R;
+import com.sawaaid.malltemplate.adapter.AdapterSections;
+import com.sawaaid.malltemplate.adapter.AdapterSectionsFragment;
+import com.sawaaid.malltemplate.connection.Request;
+import com.sawaaid.malltemplate.connection.RequestListener;
+import com.sawaaid.malltemplate.connection.response.RespSections;
+import com.sawaaid.malltemplate.data.DataApp;
+import com.sawaaid.malltemplate.databinding.FragmentSectionsBinding;
+import com.sawaaid.malltemplate.model.Section;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FragmentSections#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.List;
+
 public class FragmentSections extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    FragmentSectionsBinding binding;
+    AdapterSectionsFragment adapterSectionsFragment;
+    Request request;
+    Context context;
 
     public FragmentSections() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentSections.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static FragmentSections newInstance(String param1, String param2) {
-        FragmentSections fragment = new FragmentSections();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sections, container, false);
+        binding = FragmentSectionsBinding.inflate(getLayoutInflater());
+        initComponent();
+
+        return binding.getRoot();
+    }
+
+    private void initComponent() {
+        request = new Request();
+        requestSections();
+    }
+
+    private void requestSections() {
+        binding.progressBar.setVisibility(View.VISIBLE);
+        request.sections(new RequestListener<RespSections>() {
+            @Override
+            public void onFinish() {
+                super.onFinish();
+                binding.progressBar.setVisibility(View.INVISIBLE);
+            }
+
+            @Override
+            public void onSuccess(RespSections resp) {
+                super.onSuccess(resp);
+                displayData(resp.data);
+                DataApp.dao().deleteSections();
+                DataApp.dao().insertSections(resp.data);
+            }
+
+            @Override
+            public void onFailed(String messages) {
+                super.onFailed(messages);
+                List<Section> sections = DataApp.dao().getSections();
+                if (sections.size() != 0)
+                    displayData(sections);
+            }
+        });
+    }
+
+    private void displayData(List<Section> data) {
+        addRecyclerWithAdapter(binding.categoriesRecyclerView, data);
+    }
+
+    private void addRecyclerWithAdapter(RecyclerView recyclerView, List<Section> data) {
+        adapterSectionsFragment = new AdapterSectionsFragment(data, context);
+        recyclerView.setLayoutManager(new GridLayoutManager(context, 3));
+        recyclerView.setAdapter(adapterSectionsFragment);
+        recyclerView.setOnFlingListener(null);
+        recyclerView.setItemViewCacheSize(50);
+
+        adapterSectionsFragment.setOnItemClickListener((view, obj, position) -> {
+            Intent intent = new Intent(context, ActivitySectionProducts.class);
+            intent.putExtra("SECTION_ID", obj.id);
+            startActivity(intent);
+        });
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        this.context = null;
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        this.context = context;
     }
 }

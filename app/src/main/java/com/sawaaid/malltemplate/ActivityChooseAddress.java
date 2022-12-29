@@ -1,7 +1,6 @@
 package com.sawaaid.malltemplate;
 
 import static com.sawaaid.malltemplate.adapter.AdapterAddresses.viewArrayListAddress;
-import static com.sawaaid.malltemplate.adapter.AdapterSubSections.viewArrayList;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,7 +20,6 @@ import com.sawaaid.malltemplate.data.DataApp;
 import com.sawaaid.malltemplate.databinding.ActivityChooseAddressBinding;
 import com.sawaaid.malltemplate.model.Address;
 import com.sawaaid.malltemplate.model.ViewAddressModel;
-import com.sawaaid.malltemplate.model.ViewArrayModel;
 
 import java.util.List;
 
@@ -42,7 +40,7 @@ public class ActivityChooseAddress extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         totalPrice = getIntent().getStringExtra("TOTAL_PRICE");
-        Log.d("TAGb", "onCreate: " + totalPrice);
+
         initComponent();
     }
 
@@ -54,8 +52,9 @@ public class ActivityChooseAddress extends AppCompatActivity {
             intent.putExtra("TOTAL_PRICE", totalPrice);
             startActivity(intent);
         });
-        binding.addNewAddressButton.setOnClickListener(view -> startActivity(new Intent(ActivityChooseAddress.this, ActivityAddAddress.class)));
-        requestAddresses();
+        binding.addNewAddressButton.setOnClickListener(view ->
+                startActivity(new Intent(ActivityChooseAddress.this, ActivityAddAddress.class)));
+
     }
 
     private void requestAddresses() {
@@ -89,12 +88,9 @@ public class ActivityChooseAddress extends AppCompatActivity {
         binding.recyclerView.setOnFlingListener(null);
         binding.recyclerView.setItemViewCacheSize(50);
 
-        adapterAddresses.setOnDeleteClickListener((view, obj, position) -> {
-            requestDeleteAddress(obj.id);
-        });
+        adapterAddresses.setOnDeleteClickListener((view, obj, position) -> requestDeleteAddress(obj.id));
 
         adapterAddresses.setOnItemClickListener((view, obj, position) -> {
-            //TODO: make variable to hold the id of address
             locationId = String.valueOf(obj.id);
 
             for (ViewAddressModel v : viewArrayListAddress) {
@@ -135,5 +131,11 @@ public class ActivityChooseAddress extends AppCompatActivity {
                 super.onFailed(messages);
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        requestAddresses();
     }
 }

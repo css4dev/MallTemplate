@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.sawaaid.malltemplate.ActivityChooseAddress;
@@ -72,9 +73,13 @@ public class FragmentCart extends Fragment {
         rootView = binding.getRoot();
         button = rootView.findViewById(R.id.buttonBuy);
         button.setOnClickListener(view -> {
-            Intent intent = new Intent(context, ActivityChooseAddress.class);
-            intent.putExtra("TOTAL_PRICE", String.valueOf(BillPrice));
-            startActivity(intent);
+            if (DataApp.global().isLogin()) {
+                Intent intent = new Intent(context, ActivityChooseAddress.class);
+                intent.putExtra("TOTAL_PRICE", String.valueOf(BillPrice));
+                startActivity(intent);
+            }else{
+                Toast.makeText(context, "الرجاء تسجيل الدخول أولاً", Toast.LENGTH_SHORT).show();
+            }
         });
         parent = rootView.findViewById(R.id.parent);
         initComponent();
@@ -129,7 +134,7 @@ public class FragmentCart extends Fragment {
 
     private void displayData(List<Product> data) {
         adapterCart = new AdapterCart(data, binding.totalPriceTextView, binding.recyclerView, bottomNavigationView, binding.noProductsInBasketTextView, fare, minimumOrderPrice, parent, binding.fareTextView, mainActivity);
-        binding.recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
         binding.recyclerView.setAdapter(adapterCart);
         binding.recyclerView.setOnFlingListener(null);
         binding.recyclerView.setItemViewCacheSize(50);
@@ -158,9 +163,7 @@ public class FragmentCart extends Fragment {
         if (BillPrice < Double.parseDouble(minimumOrderPrice)) {
             BillPrice = BillPrice + Double.parseDouble(fare);
             Locale locale = new Locale("TR", "TR");
-
             binding.totalPriceTextView.setText(("₺ " + String.format(locale, "%.2f", (BillPrice))));
-
             binding.fareTextView.setText("تم إضافة " + fare + " ليرة تركية على الطلب الأقل من " + minimumOrderPrice);
             binding.fareTextView.setVisibility(View.VISIBLE);
         }
