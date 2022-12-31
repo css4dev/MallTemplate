@@ -47,6 +47,8 @@ public class ActivityCompletePurchase extends AppCompatActivity {
 
         requestProducts();
 
+        binding.buttonBuy.setOnClickListener(view -> insertOrder());
+
     }
 
     private void requestProducts() {

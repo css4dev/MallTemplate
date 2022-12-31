@@ -82,6 +82,10 @@ public interface API {
     @POST("api/signUp")
     Call<RespUser> signUp(@FieldMap HashMap<String, String> map);
 
+    @FormUrlEncoded
+    @POST("api/editProfile")
+    Call<RespUser> editProfile(@FieldMap HashMap<String, String> map);
+
     @DELETE("api/deleteLocation/{id}")
     Call<Resp> deleteAddress(@Path("id") String id);
 
