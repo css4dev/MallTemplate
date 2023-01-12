@@ -5,10 +5,16 @@ import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -16,6 +22,7 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import com.sawaaid.malltemplate.connection.Request;
 import com.sawaaid.malltemplate.connection.RequestListener;
 import com.sawaaid.malltemplate.connection.response.RespProduct;
+import com.sawaaid.malltemplate.data.DataApp;
 import com.sawaaid.malltemplate.fragment.FragmentCart;
 import com.sawaaid.malltemplate.fragment.FragmentFavorite;
 import com.sawaaid.malltemplate.fragment.FragmentHome;
@@ -28,12 +35,18 @@ public class ActivityMain extends AppCompatActivity {
     FragmentHome fragmentHome;
     SearchView searchEdit;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         FirebaseMessaging.getInstance().subscribeToTopic("NEWS");
+
+        if (DataApp.pref().isFirstLaunch()) {
+            ActivityOnBoarding.navigate(this);
+            DataApp.pref().setFirstLaunch(false);
+        }
 
         initComponents();
 

@@ -2,4 +2,22 @@
     <string name="app_name">MallTemplate</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="share_text">share</string>
+
+    <string-array name="about_title_array">
+        <item>تطبيق المولات</item>
+        <item>تطبيق المولات</item>
+        <item>تطبيق المولات</item>
+    </string-array>
+
+    <string-array name="about_description_array">
+        <item>بنصحك كتير تشتغل على هذا التطبيق المتميز الكويس يلي مافي متلو بالكون كلو وإنو يعني من تصميم أبو النور الورد وبس هيك يا كويس يا منيح</item>
+        <item>بنصحك كتير تشتغل على هذا التطبيق المتميز الكويس يلي مافي متلو بالكون كلو وإنو يعني من تصميم أبو النور الورد وبس هيك يا كويس يا منيح</item>
+        <item>بنصحك كتير تشتغل على هذا التطبيق المتميز الكويس يلي مافي متلو بالكون كلو وإنو يعني من تصميم أبو النور الورد وبس هيك يا كويس يا منيح</item>
+    </string-array>
+
+    <integer-array name="about_images_array">
+        <item>@drawable/on_boarding_1</item>
+        <item>@drawable/on_boarding_2</item>
+        <item>@drawable/on_boarding_3</item>
+    </integer-array>
 </resources>
